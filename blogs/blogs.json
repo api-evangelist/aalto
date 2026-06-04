@@ -1,0 +1,14 @@
+{
+  "repo": "aalto",
+  "feeds": [
+    {
+      "source": "https://www.aalto.fi/en/news",
+      "feed_url": "https://www.aalto.fi/en/news",
+      "title": "News | Aalto University",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-06-03T00:00:00Z"
+}

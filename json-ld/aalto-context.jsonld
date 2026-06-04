@@ -1,0 +1,92 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "aalto": "https://www.aalto.fi/ns#",
+    "@vocab": "https://www.aalto.fi/ns#",
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": "schema:url",
+    "logo": "schema:logo",
+    "sameAs": "schema:sameAs",
+    "email": "schema:email",
+    "address": "schema:address",
+    "foundingDate": "schema:foundingDate",
+    "location": "schema:location",
+    "department": "schema:department",
+    "alumni": "schema:alumni",
+    "CollegeOrUniversity": "schema:CollegeOrUniversity",
+    "EducationalOrganization": "schema:EducationalOrganization",
+    "WebAPI": "schema:WebAPI",
+    "Dataset": "schema:Dataset",
+    "api": {
+      "@id": "aalto:api",
+      "@type": "@id"
+    },
+    "apiName": "schema:name",
+    "apiDescription": "schema:description",
+    "humanURL": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "baseURL": {
+      "@id": "aalto:baseURL",
+      "@type": "@id"
+    },
+    "documentation": {
+      "@id": "schema:documentation",
+      "@type": "@id"
+    },
+    "course": "schema:Course",
+    "courseCode": "schema:courseCode",
+    "publication": "schema:CreativeWork",
+    "repository": {
+      "@id": "aalto:repository",
+      "@type": "@id"
+    },
+    "sparqlEndpoint": {
+      "@id": "aalto:sparqlEndpoint",
+      "@type": "@id"
+    },
+    "oaiEndpoint": {
+      "@id": "aalto:oaiEndpoint",
+      "@type": "@id"
+    }
+  },
+  "@type": "CollegeOrUniversity",
+  "name": "Aalto University",
+  "url": "https://www.aalto.fi/en",
+  "description": "Aalto University is a multidisciplinary public research university in Espoo, Finland, formed in 2010 from the merger of three institutions.",
+  "foundingDate": "2010",
+  "sameAs": [
+    "https://www.linkedin.com/school/aalto-university/",
+    "https://github.com/AaltoSciComp"
+  ],
+  "api": [
+    {
+      "@type": "WebAPI",
+      "apiName": "Aalto API Gateway",
+      "humanURL": "https://www.aalto.fi/en/services/api-gateway-application-programming-interface",
+      "documentation": "https://apiportal.aalto.fi/"
+    },
+    {
+      "@type": "WebAPI",
+      "apiName": "Open Courses API (SISU)",
+      "humanURL": "https://3scale.apps.ocp4.aalto.fi/docs/swagger/open_courses_sisu",
+      "documentation": "https://3scale.apps.ocp4.aalto.fi/docs/swagger/open_courses_sisu"
+    },
+    {
+      "@type": "WebAPI",
+      "apiName": "Linked Open Aalto Data (SPARQL)",
+      "humanURL": "https://data.aalto.fi/",
+      "sparqlEndpoint": "http://ldf.fi/loa/sparql"
+    },
+    {
+      "@type": "WebAPI",
+      "apiName": "Aaltodoc Repository (OAI-PMH and REST)",
+      "humanURL": "https://aaltodoc.aalto.fi/",
+      "oaiEndpoint": "https://aaltodoc.aalto.fi/server/oai/request",
+      "baseURL": "https://aaltodoc.aalto.fi/server/api"
+    }
+  ]
+}
