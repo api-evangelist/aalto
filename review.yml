@@ -1,0 +1,49 @@
+---
+name: Aalto University
+description: Aalto University public developer/API footprint review for APIs.json cataloging.
+url: https://raw.githubusercontent.com/api-evangelist/aalto/refs/heads/main/review.yml
+created: '2026-06-03'
+modified: '2026-06-03'
+reviews:
+  - date: '2026-06-03'
+    rating: 3
+    summary: >-
+      Aalto exposes a real but largely gated API program plus genuinely open
+      research/linked-data services. The Aalto API Gateway and its Open Courses
+      (SISU) API resolve but require an Aalto account to view specs or call
+      endpoints; no anonymous course endpoints were confirmed. The Linked Open
+      Aalto Data SPARQL endpoint (ldf.fi/loa) and the Aaltodoc OAI-PMH 2.0
+      endpoint and DSpace REST API are publicly reachable and were verified live.
+      The AaltoUniversity GitHub org exists but has no public repositories;
+      AaltoSciComp is the active public org (169 repos). No endpoints fabricated.
+    endpoints:
+      - url: https://apiportal.aalto.fi/
+        status: 200
+        note: API Gateway portal; redirects to 3scale OCP host, sign-in required.
+      - url: https://3scale.apps.ocp4.aalto.fi/
+        status: 200
+        note: 3scale developer portal backing the gateway.
+      - url: https://3scale.apps.ocp4.aalto.fi/docs/swagger/open_courses_sisu
+        status: 200
+        note: Open Courses (SISU) Swagger; full spec gated behind login, base path /api/aalto.
+      - url: https://www.aalto.fi/en/services/api-gateway-application-programming-interface
+        status: 406
+        note: Official gateway service page; server returned 406 to curl but page exists in browser.
+      - url: https://data.aalto.fi/
+        status: 200
+        note: Linked Open Aalto Data landing page; describes SPARQL, browser, downloads.
+      - url: http://ldf.fi/loa/sparql
+        status: 303
+        note: Public SPARQL endpoint (303 redirect to YASGUI query UI), resolves.
+      - url: https://aaltodoc.aalto.fi/oai/request?verb=Identify
+        status: 200
+        note: Aaltodoc OAI-PMH 2.0 Identify response verified, OpenAIRE compliant.
+      - url: https://aaltodoc.aalto.fi/server/api
+        status: 200
+        note: Aaltodoc DSpace REST API root, publicly reachable.
+      - url: https://github.com/AaltoSciComp
+        status: 200
+        note: Active public GitHub org, 169 public repositories.
+      - url: https://github.com/AaltoUniversity
+        status: 200
+        note: Org exists but no public repositories.

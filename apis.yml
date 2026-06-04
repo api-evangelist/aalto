@@ -1,0 +1,109 @@
+---
+aid: aalto
+name: Aalto University
+description: >-
+  Aalto University is a multidisciplinary public research university in Espoo,
+  Finland, formed in 2010 from the merger of three institutions and ranked #113
+  in the QS World University Rankings 2025. Its public developer footprint is
+  modest and mostly research- or open-data-oriented: an authentication-gated
+  Aalto API Gateway (3scale) exposing course/student information system APIs
+  such as the Open Courses (SISU) API, a Linked Open Aalto Data service offering
+  a public SPARQL endpoint, and the Aaltodoc institutional repository (DSpace)
+  with public OAI-PMH and REST access. Active open-source development is
+  published primarily through the AaltoSciComp GitHub organization.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/aalto/refs/heads/main/apis.yml
+tags:
+  - Education
+  - Higher Education
+  - University
+  - Research
+  - Open Data
+  - Linked Data
+  - Finland
+created: '2026-06-03'
+modified: '2026-06-03'
+specificationVersion: '0.19'
+apis:
+  - aid: aalto:api-gateway
+    name: Aalto API Gateway
+    description: >-
+      Aalto's 3scale-based API gateway exposing open interfaces about Aalto and
+      its operations, sourced from systems such as Oodi and ASIO. Access
+      requires signing in with an Aalto account (and the developer portal
+      typically requires the Aalto network or VPN); it is not a fully public,
+      anonymous API.
+    humanURL: https://www.aalto.fi/en/services/api-gateway-application-programming-interface
+    tags: [ Education, API Gateway, Courses, Students, Authentication ]
+    properties:
+      - type: Documentation
+        url: https://www.aalto.fi/en/services/api-gateway-application-programming-interface
+      - type: SignUp
+        url: https://apiportal.aalto.fi/
+  - aid: aalto:open-courses-sisu
+    name: Open Courses API (SISU)
+    description: >-
+      Course-data API exposed through the Aalto API Gateway, providing course
+      and realization information from the SISU student information system. A
+      Swagger/OpenAPI reference is published, but the rendered specification and
+      live calls require authentication with an Aalto account; the base path is
+      /api/aalto.
+    humanURL: https://3scale.apps.ocp4.aalto.fi/docs/swagger/open_courses_sisu
+    tags: [ Courses, SISU, Education, Students ]
+    properties:
+      - type: Documentation
+        url: https://3scale.apps.ocp4.aalto.fi/docs/swagger/open_courses_sisu
+      - type: SignUp
+        url: https://apiportal.aalto.fi/
+  - aid: aalto:linked-open-data
+    name: Linked Open Aalto Data (SPARQL)
+    description: >-
+      Open data published by Aalto University expressed as Linked Data, offering
+      a public SPARQL query endpoint, a Linked Data browser, and downloadable
+      datasets covering courses, publications, research projects, buildings,
+      staff, organizational structure, and events. The SPARQL endpoint is hosted
+      on the Linked Data Finland platform (ldf.fi/loa).
+    humanURL: https://data.aalto.fi/
+    baseURL: http://ldf.fi/loa/sparql
+    tags: [ Open Data, Linked Data, SPARQL, RDF ]
+    properties:
+      - type: Documentation
+        url: https://data.aalto.fi/
+  - aid: aalto:aaltodoc-oai
+    name: Aaltodoc Repository (OAI-PMH and REST)
+    description: >-
+      Aaltodoc is Aalto University's DSpace-based institutional repository of
+      theses, articles, conference publications, and research materials. It
+      exposes a public, OAI-PMH 2.0 endpoint (OpenAIRE compliant) for metadata
+      harvesting and a DSpace REST API at /server/api.
+    humanURL: https://aaltodoc.aalto.fi/
+    baseURL: https://aaltodoc.aalto.fi/oai/request
+    tags: [ Repository, OAI-PMH, DSpace, Research, Open Access ]
+    properties:
+      - type: Documentation
+        url: https://www.aalto.fi/en/open-science-and-research/aaltodoc-publication-archive
+      - type: OpenAPI
+        url: https://aaltodoc.aalto.fi/server/api
+common:
+  - type: Website
+    url: https://www.aalto.fi/en
+  - type: DeveloperPortal
+    url: https://apiportal.aalto.fi/
+  - type: GitHub
+    url: https://github.com/AaltoSciComp
+  - type: LinkedIn
+    url: https://www.linkedin.com/school/aalto-university/
+  - type: Plans
+    url: plans/aalto-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/aalto-rate-limits.yml
+  - type: FinOps
+    url: finops/aalto-finops.yml
+  - type: Review
+    url: review.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
