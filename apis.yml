@@ -41,7 +41,7 @@ apis:
     properties:
       - type: Documentation
         url: https://www.aalto.fi/en/services/api-gateway-application-programming-interface
-      - type: SignUp
+      - type: Signup
         url: https://apiportal.aalto.fi/
   - aid: aalto:open-courses-sisu
     name: Open Courses API (SISU)
@@ -56,7 +56,7 @@ apis:
     properties:
       - type: Documentation
         url: https://3scale.apps.ocp4.aalto.fi/docs/swagger/open_courses_sisu
-      - type: SignUp
+      - type: Signup
         url: https://apiportal.aalto.fi/
   - aid: aalto:linked-open-data
     name: Linked Open Aalto Data (SPARQL)
