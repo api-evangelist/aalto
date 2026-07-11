@@ -88,6 +88,8 @@ apis:
       - type: OpenAPI
         url: https://aaltodoc.aalto.fi/server/api
 common:
+  - type: DomainSecurity
+    url: security/aalto-domain-security.yml
   - type: Website
     url: https://www.aalto.fi/en
   - type: DeveloperPortal

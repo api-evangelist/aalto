@@ -1,0 +1,28 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.aalto.fi
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Jan 12 11:22:25 2027 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: 3scale.apps.ocp4.aalto.fi
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Dec 12 14:20:03 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: data.aalto.fi
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct  6 10:44:56 2026 GMT
+  hsts: false
+domains:
+- domain: aalto.fi
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine
