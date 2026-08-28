@@ -12,6 +12,17 @@ description: >-
   with public OAI-PMH and REST access. Active open-source development is
   published primarily through the AaltoSciComp GitHub organization.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: unknown
