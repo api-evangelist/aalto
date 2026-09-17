@@ -316,28 +316,6 @@ apis:
     url: https://3scale.apps.ocp4.aalto.fi/docs/swagger/research
   - type: Documentation
     url: https://3scale.apps.ocp4.aalto.fi/docs/swagger/projectscostcenters
-- aid: aalto:aalto-costcenters-api
-  name: Aalto University Costcenters API
-  description: The Costcenters API from Aalto University — 1 operation(s) for costcenters.
-  humanURL: https://www.aalto.fi/en/services/api-gateway-application-programming-interface
-  baseURL: https://3scale.apps.ocp4.aalto.fi
-  tags:
-  - Costcenters
-  properties:
-  - type: OpenAPI
-    url: openapi/aalto-costcenters-api-openapi.yml
-  - type: JSONSchema
-    url: json-schema/aalto-facilities-api-schema.json
-  - type: Documentation
-    url: https://3scale.apps.ocp4.aalto.fi/docs/swagger/facilities2
-  - type: JSONSchema
-    url: json-schema/aalto-course-sisu-api-schema.json
-  - type: Documentation
-    url: https://3scale.apps.ocp4.aalto.fi/docs/swagger/open_courses_sisu
-  - type: Documentation
-    url: https://3scale.apps.ocp4.aalto.fi/docs/swagger/research
-  - type: Documentation
-    url: https://3scale.apps.ocp4.aalto.fi/docs/swagger/projectscostcenters
 - aid: aalto:aalto-groups-api
   name: Aalto University Groups API
   description: The Groups API from Aalto University — 1 operation(s) for groups.
@@ -504,6 +482,28 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/aalto-sisu-courses-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/aalto-facilities-api-schema.json
+  - type: Documentation
+    url: https://3scale.apps.ocp4.aalto.fi/docs/swagger/facilities2
+  - type: JSONSchema
+    url: json-schema/aalto-course-sisu-api-schema.json
+  - type: Documentation
+    url: https://3scale.apps.ocp4.aalto.fi/docs/swagger/open_courses_sisu
+  - type: Documentation
+    url: https://3scale.apps.ocp4.aalto.fi/docs/swagger/research
+  - type: Documentation
+    url: https://3scale.apps.ocp4.aalto.fi/docs/swagger/projectscostcenters
+- aid: aalto:aalto-cost-centers-api
+  name: Aalto University Cost Centers API
+  description: The Cost Centers API from Aalto University — 1 operation(s) for cost centers.
+  humanURL: https://www.aalto.fi/en/services/api-gateway-application-programming-interface
+  baseURL: https://3scale.apps.ocp4.aalto.fi
+  tags:
+  - Cost Centers
+  properties:
+  - type: OpenAPI
+    url: openapi/aalto-cost-centers-api-openapi.yml
   - type: JSONSchema
     url: json-schema/aalto-facilities-api-schema.json
   - type: Documentation
