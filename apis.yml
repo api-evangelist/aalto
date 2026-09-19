@@ -205,6 +205,13 @@ apis:
   - Shibboleth
   - Haka
   - eduGAIN
+  - SSO
+  tags_raw:
+  - Identity Federation
+  - SAML
+  - Shibboleth
+  - Haka
+  - eduGAIN
   - Single Sign-On
   properties:
   - type: IdentityFederation
@@ -249,6 +256,12 @@ apis:
   baseURL: https://acris.aalto.fi/ws/api
   tags:
   - Research
+  - CRI
+  - Elsevier Pure
+  - Research Data
+  - Tenants
+  tags_raw:
+  - Research
   - CRIS
   - Elsevier Pure
   - Research Data
@@ -272,6 +285,13 @@ apis:
   - Ex Libris
   - Primo
   - Finna
+  - Tenants
+  tags_raw:
+  - Library
+  - Discovery
+  - Ex Libris
+  - Primo
+  - Finna
   - Tenant
   properties:
   - type: LibraryCatalog
@@ -286,6 +306,12 @@ apis:
     so only the tenancy is recorded here.
   humanURL: https://sisu.aalto.fi/student/search/main
   tags:
+  - Course Catalog
+  - Student Information System
+  - SISU
+  - Funidata
+  - Tenants
+  tags_raw:
   - Course Catalog
   - Student Information System
   - SISU
@@ -322,6 +348,8 @@ apis:
   humanURL: https://www.aalto.fi/en/services/api-gateway-application-programming-interface
   baseURL: https://3scale.apps.ocp4.aalto.fi
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -389,6 +417,8 @@ apis:
   humanURL: https://www.aalto.fi/en/services/api-gateway-application-programming-interface
   baseURL: https://3scale.apps.ocp4.aalto.fi
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
@@ -411,6 +441,8 @@ apis:
   humanURL: https://www.aalto.fi/en/services/api-gateway-application-programming-interface
   baseURL: https://3scale.apps.ocp4.aalto.fi
   tags:
+  - Research Outputs
+  tags_raw:
   - research-outputs
   properties:
   - type: OpenAPI
