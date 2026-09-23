@@ -1,0 +1,106 @@
+---
+name: Aalto University — Authentication
+description: >-
+  How Aalto University's institution-operated API surfaces authenticate. Two distinct regimes are in
+  play: every Aalto API Gateway product is API-key gated and returns 403 to an anonymous caller, while
+  the Aaltodoc repository's OAI-PMH and DSpace REST read surfaces are fully anonymous. Separately,
+  Aalto operates its own Shibboleth SAML 2.0 identity provider for browser-based sign-in to campus
+  services, which is federation infrastructure rather than an API credential.
+generated: '2026-08-30'
+method: probed
+source: >-
+  securitySchemes read from Aalto's own OpenAPI documents on
+  https://3scale.apps.ocp4.aalto.fi/api_docs/services.json, plus live unauthenticated probes of each
+  declared server on 2026-08-30.
+x-operator: institution
+url: https://raw.githubusercontent.com/api-evangelist/aalto/main/authentication/aalto-authentication.yml
+
+mechanisms:
+  - id: gateway-api-key-header
+    type: apiKey
+    label: Aalto API Gateway — API key in header
+    in: header
+    parameter_names:
+      - X-ApiKey
+      - USER-KEY
+    applies_to:
+      - Aalto project and costcenter API (X-ApiKey)
+      - Acris Research Publications API (USER-KEY)
+    onboarding: >-
+      Register an application on the Aalto API Gateway developer portal at
+      https://3scale.apps.ocp4.aalto.fi/ (front door https://apiportal.aalto.fi/) and a key is issued
+      per application. Registration requires an Aalto account; the portal advertises "Register",
+      "Get Your API Key" and "Create Your App" as the three onboarding steps.
+    method: searched
+    source: https://3scale.apps.ocp4.aalto.fi/api_docs/services/13.json
+
+  - id: gateway-api-key-query
+    type: apiKey
+    label: Aalto API Gateway — API key in query string
+    in: query
+    parameter_names:
+      - USER_KEY
+    applies_to:
+      - Sisu Course API
+    method: searched
+    source: https://3scale.apps.ocp4.aalto.fi/api_docs/services/27.json
+
+  - id: gateway-undeclared
+    type: apiKey
+    label: Gateway-enforced key, not declared in the contract
+    in: unknown
+    applies_to:
+      - Aalto facilities api
+      - Aalto people profile api
+    note: >-
+      Neither document declares a securityScheme, but both declared servers reject an anonymous call
+      at the 3scale edge. The enforcement is real and the contract does not describe it — a genuine
+      contract gap, recorded here rather than invented into the spec.
+    method: probed
+    source: https://facilities.api.aalto.fi/api/aalto/facilities/v1/buildings
+
+  - id: anonymous-read
+    type: none
+    label: Anonymous public read
+    applies_to:
+      - Aaltodoc OAI-PMH 2.0 (https://aaltodoc.aalto.fi/server/oai/request)
+      - Aaltodoc DSpace 9.2 REST API (https://aaltodoc.aalto.fi/server/api)
+      - Linked Open Aalto Data SPARQL (http://ldf.fi/loa/sparql, POST only)
+    note: >-
+      These are the only Aalto surfaces that answer a credential-free request with data. Everything on
+      the API Gateway does not.
+    method: probed
+    source: https://aaltodoc.aalto.fi/server/oai/request?verb=Identify
+
+  - id: shibboleth-saml
+    type: saml
+    label: Shibboleth SAML 2.0 identity provider (browser SSO, not an API credential)
+    entity_id: https://idp.aalto.fi/idp/shibboleth
+    scope: aalto.fi
+    federation: Haka (Finnish higher-education federation), onward to eduGAIN
+    method: probed
+    source: https://idp.aalto.fi/idp/shibboleth
+
+anonymous_probe_results:
+  - url: https://facilities.api.aalto.fi/api/aalto/facilities/v1/buildings
+    status: 403
+    body: Authentication parameters missing
+  - url: https://course.api.aalto.fi/api/sisu/v1/courseunits
+    status: 403
+  - url: https://research.api.aalto.fi/api/acris/v1/research-outputs
+    status: 403
+  - url: https://aaltopeople.api.aalto.fi/api/aaltopeople/v1/profiles
+    status: 403
+  - url: https://api.aalto.fi/api/dw_projects/schools
+    status: 403
+  - url: https://aaltodoc.aalto.fi/server/oai/request?verb=Identify
+    status: 200
+  - url: https://aaltodoc.aalto.fi/server/api
+    status: 200
+
+oauth: false
+scopes: none_declared
+notes: >-
+  No OAuth 2.0 authorization server, no declared scopes, and no machine-readable onboarding document
+  were found on any Aalto surface. The gateway's key issuance is a human web flow behind an Aalto
+  account, so third-party access to the five gateway products is not self-service for the public.

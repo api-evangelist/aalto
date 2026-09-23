@@ -3,8 +3,99 @@ name: Aalto University
 description: Aalto University public developer/API footprint review for APIs.json cataloging.
 url: https://raw.githubusercontent.com/api-evangelist/aalto/refs/heads/main/review.yml
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-30'
 reviews:
+  - date: '2026-08-30'
+    rating: 4
+    summary: >-
+      Re-profiled under the university pipeline, with operator attribution settled before anything was
+      saved. Aalto turns out to run a genuine institution-owned API program, which the June 2026 pass
+      under-counted: its 3scale gateway leaves the ActiveDocs index at /api_docs/services.json open
+      without credentials, exposing forty-four Aalto-authored Swagger/OpenAPI documents. Five
+      production products are documented on the portal (facilities and reservations, SISU courses,
+      Acris research publications, projects and cost centres, and a deprecated Oodi course API); the
+      contracts for five of them are now saved, every one with servers under *.api.aalto.fi. Every
+      gateway endpoint returns 403 "Authentication parameters missing" to an anonymous caller, so the
+      contracts are public and the data is not. Two corrections to the June record: the Linked Open
+      Aalto Data SPARQL endpoint answers only over POST — a GET times out and its own redirect target
+      404s, so a status-code-only probe reads it as dead — and the published Aaltodoc OAI path
+      /oai/request now 301s to /server/oai/request under DSpace 9.2. New finds: Aalto's own Shibboleth
+      SAML 2.0 identity provider with forty-one Aalto entities registered in the Haka federation, an
+      Aalto-run GitLab at version.aalto.fi, the Triton research-computing service, and an institutional
+      AI posture with its own assistant at ai.aalto.fi. Acris/Pure, Ex Libris Primo/Alma, Finna and
+      Funidata's SISU are recorded as tenant relationships; no vendor contract was saved under Aalto's
+      name.
+    endpoints:
+      - url: https://3scale.apps.ocp4.aalto.fi/api_docs/services.json
+        status: 200
+        note: Public 3scale ActiveDocs index, 44 Aalto-authored specs, no credentials required.
+      - url: https://3scale.apps.ocp4.aalto.fi/docs
+        status: 200
+        note: Five documented API products; the "Public API Products" grid is empty, all five are private.
+      - url: https://facilities.api.aalto.fi/api/aalto/facilities/v1/buildings
+        status: 403
+        note: 'Body: "Authentication parameters missing". Live, API-key gated.'
+      - url: https://course.api.aalto.fi/api/sisu/v1/courseunits
+        status: 403
+        note: SISU course API, gateway-gated.
+      - url: https://research.api.aalto.fi/api/acris/v1/research-outputs
+        status: 403
+        note: Aalto's own four-path wrapper over Acris, gateway-gated.
+      - url: https://aaltopeople.api.aalto.fi/api/aaltopeople/v1/profiles
+        status: 403
+        note: People profile proxy, gateway-gated.
+      - url: https://api.aalto.fi/api/dw_projects/schools
+        status: 403
+        note: Projects and cost centers API, gateway-gated.
+      - url: https://aaltodoc.aalto.fi/server/oai/request?verb=Identify
+        status: 200
+        note: OAI-PMH 2.0 verified; repositoryIdentifier aaltodoc.aalto.fi, 16 metadata formats.
+      - url: https://aaltodoc.aalto.fi/server/api
+        status: 200
+        note: DSpace 9.2 REST root, anonymous read.
+      - url: https://idp.aalto.fi/idp/shibboleth
+        status: 200
+        note: SAML 2.0 IdP metadata, entityID https://idp.aalto.fi/idp/shibboleth, scope aalto.fi.
+      - url: https://haka.funet.fi/metadata/haka-metadata.xml
+        status: 200
+        note: 41 Aalto entityIDs registered in the Finnish Haka federation, onward to eduGAIN.
+      - url: http://ldf.fi/loa/sparql
+        status: 200
+        note: 'Live over POST only (real data.aalto.fi triples returned); GET times out and the redirect target 404s.'
+      - url: https://data.aalto.fi/
+        status: 200
+        note: Landing page live, but /data and /dataset return 503 — Linked Data browser partly down.
+      - url: https://acris.aalto.fi/ws/api/515/api-docs/index.html
+        status: 401
+        note: Elsevier Pure web service, credential-gated. Tenant surface; vendor spec NOT saved.
+      - url: https://research.aalto.fi/
+        status: 200
+        note: Elsevier Pure Portal. Tenant.
+      - url: https://primo.aalto.fi/
+        status: 200
+        note: Ex Libris Primo NDE, view 358AALTO_INST:MAIN. Tenant.
+      - url: https://aalto.finna.fi/
+        status: 403
+        note: Finna national discovery view; bot-challenged at the edge, not a finding about Aalto.
+      - url: https://version.aalto.fi/
+        status: 200
+        note: Aalto-operated GitLab instance, registered in Haka.
+      - url: https://scicomp.aalto.fi/
+        status: 200
+        note: Aalto Scientific Computing / Triton HPC service pages.
+      - url: https://ai.aalto.fi/
+        status: 200
+        note: Aalto AI Assistant, institution-operated AI tooling.
+      - url: https://www.aalto.fi/en/services/ai-in-aalto
+        status: 200
+        note: Institutional AI hub — guidance, AI Act and AI literacy, tools and playgrounds.
+      - url: https://www.aalto.fi/llms.txt
+        status: 404
+        note: No llms.txt published.
+      - url: https://www.aalto.fi/.well-known/security.txt
+        status: 404
+        note: No security.txt published.
+
   - date: '2026-06-03'
     rating: 3
     summary: >-

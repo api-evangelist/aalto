@@ -1,0 +1,95 @@
+---
+name: Aalto University — API Lifecycle
+description: >-
+  Versioning, deprecation and environment posture across Aalto University's institution-operated API
+  surfaces. Aalto is one of the few universities in this cohort with an observable deprecation event:
+  its Oodi-sourced Course API is labelled deprecated on the developer portal and superseded by a
+  SISU-sourced replacement, and both remain published side by side.
+generated: '2026-08-30'
+method: derived
+source: >-
+  https://3scale.apps.ocp4.aalto.fi/docs and the OpenAPI documents linked from
+  https://3scale.apps.ocp4.aalto.fi/api_docs/services.json, read 2026-08-30
+x-operator: institution
+url: https://raw.githubusercontent.com/api-evangelist/aalto/main/lifecycle/aalto-lifecycle.yml
+
+deprecation:
+  - api: Aalto Open API (Course API, Oodi-sourced)
+    status: deprecated
+    successor: Course API (SISU)
+    evidence:
+      url: https://3scale.apps.ocp4.aalto.fi/docs
+      status: 200
+      value: >-
+        "Course API (Deprecated) — Query information about Aalto courses. This API source is OODI and
+        should not be used."
+    successor_evidence:
+      url: https://3scale.apps.ocp4.aalto.fi/api_docs/services/27.json
+      status: 200
+      value: 'info.title: "Sisu API (replaces /oodiapi)"'
+    detail: >-
+      The deprecation is signalled in the portal product title and description and in the successor's
+      own info.title. It is NOT signalled in the machine-readable contract: the deprecated document is
+      still Swagger 2.0, no operation carries `deprecated: true`, and no Sunset or Deprecation header
+      policy is published. A machine reading the contract alone would not know.
+    method: searched
+
+versioning:
+  scheme: semver-ish, per-product, carried in info.version only
+  in_path: partial
+  detail: >-
+    Three of five products pin a version in the URL path (/api/sisu/v1, /api/acris/v1,
+    /api/aaltopeople/v1); the facilities product versions per-resource inside the path
+    (/facilities/v1/..., /reservations/v1/...); the projects and cost-centers product carries no
+    version in the path at all. No product publishes a changelog, a version index, or a
+    version-negotiation header.
+  observed_versions:
+    - api: Aalto facilities api
+      version: 1.0.2
+      openapi: 3.0.1
+    - api: Sisu API (replaces /oodiapi)
+      version: 0.0.18
+      openapi: 3.0.1
+      note: Still pre-1.0 despite being the designated replacement for a deprecated production API.
+    - api: Acris API
+      version: Pure v5.15/
+      openapi: 3.0.0
+      note: >-
+        The version string names the upstream Elsevier Pure release the gateway wraps, not a version
+        of the gateway contract itself.
+    - api: Aalto project and costcenter API
+      version: 1.0.10
+      openapi: 3.0.0
+    - api: Aalto people profile api
+      version: 1.0.3
+      openapi: 3.0.1
+    - api: Aalto Open API (Deprecated)
+      version: 1.0.0
+      openapi: '2.0'
+  method: derived
+
+environments:
+  detail: >-
+    Aalto publishes test environments inside the production contracts rather than in a separate
+    catalog. These are real Aalto-operated hosts, not placeholders, and are recorded as such.
+  hosts:
+    - url: https://facilities-test.api.aalto.fi/api/aalto
+      role: test
+    - url: https://course-test.api.aalto.fi:443/api/sisu/v1
+      role: test
+    - url: https://aalto-cost-centers-test.api.aalto.fi:443
+      role: test
+  note: >-
+    The gateway's ActiveDocs index additionally carries fourteen documents whose names end in TEST or
+    Test (AaltoSpace API Test Spec, Research API Public TEST, Aalto Employees TEST, Signing TEST API,
+    Buildings API Test, Studyinfo_test and others). They are visible to the public but are not
+    published as products on the /docs page, and none is catalogued here as a surface.
+  method: derived
+
+boilerplate_carryover:
+  detail: >-
+    Three contracts still carry Swagger's sample-project boilerplate that was never replaced:
+    termsOfService http://swagger.io/terms/ on facilities, projects/cost-centers and people-profile,
+    and contact apiteam@swagger.io on projects/cost-centers. Recorded as a contract-hygiene finding —
+    it is not a vendor-ownership signal, and the servers on all three are Aalto's own hosts.
+  method: derived

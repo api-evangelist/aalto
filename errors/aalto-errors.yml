@@ -1,0 +1,124 @@
+---
+name: Aalto University — API Error Responses
+description: Error responses declared across Aalto University's own OpenAPI documents on the Aalto API
+  Gateway, plus the error bodies the gateway actually returns to an unauthenticated caller. Extracted
+  from the contracts; nothing here was authored.
+generated: '2026-08-30'
+method: derived
+source: https://3scale.apps.ocp4.aalto.fi/api_docs/services.json
+x-operator: institution
+url: https://raw.githubusercontent.com/api-evangelist/aalto/main/errors/aalto-errors.yml
+apis:
+- file: aalto-acris-research-api-openapi.yml
+  title: Acris API
+  declared_errors:
+  - code: '400'
+    descriptions:
+    - Bad Request.
+    operations:
+    - GET /research-output-enhanced
+  - code: '401'
+    descriptions:
+    - Authorization required.
+    operations:
+    - GET /research-output-enhanced
+  - code: '404'
+    descriptions:
+    - Could not find a publication matching the given filters.
+    - Resource not found
+    operations:
+    - GET /research-output-enhanced
+    - GET /research-outputs/{id}
+    - GET /research-outputs/{id}/fingerprints
+  - code: '422'
+    descriptions:
+    - Unsupported request.
+    operations:
+    - GET /research-output-enhanced
+- file: aalto-course-sisu-api-openapi.yml
+  title: Sisu API (replaces /oodiapi)
+  declared_errors:
+  - code: '400'
+    descriptions:
+    - Bad request
+    operations:
+    - GET /courseunitrealisations
+    - GET /courseunitrealisations-enhanced
+    - GET /courseunitrealisations/{id}
+    - GET /courseunits
+  - code: '401'
+    descriptions:
+    - Unauthorized
+    operations:
+    - GET /courseunitrealisations
+    - GET /courseunitrealisations-enhanced
+    - GET /courseunitrealisations/{id}
+    - GET /courseunits
+  - code: '500'
+    descriptions:
+    - Internal error
+    operations:
+    - GET /courseunitrealisations
+    - GET /courseunitrealisations-enhanced
+    - GET /courseunitrealisations/{id}
+    - GET /courseunits
+- file: aalto-facilities-api-openapi.yml
+  title: Aalto facilities api
+  declared_errors:
+  - code: '400'
+    descriptions:
+    - Bad request
+    operations:
+    - GET /facilities/v1/building
+    - GET /facilities/v1/buildings
+    - GET /facilities/v1/buildings/{code}
+    - GET /reservations/v1/reservations
+  - code: '404'
+    descriptions:
+    - Could not find a reservation matching the given id
+    operations:
+    - GET /reservations/v1/reservations/{id}
+  - code: '500'
+    descriptions:
+    - Internal server error
+    operations:
+    - GET /facilities/v1/building
+    - GET /facilities/v1/buildings
+    - GET /facilities/v1/buildings/{code}
+- file: aalto-people-profile-api-openapi.yml
+  title: Aalto people profile api
+  declared_errors: []
+  note: No non-2xx response is declared anywhere in this contract.
+- file: aalto-projects-costcenters-api-openapi.yml
+  title: Aalto project and costcenter API
+  declared_errors:
+  - code: '400'
+    descriptions:
+    - Bad request
+    operations:
+    - GET /api/dw_projects/costcenters
+    - GET /api/dw_projects/departments
+    - GET /api/dw_projects/projects
+    - GET /api/dw_projects/schools
+  - code: '500'
+    descriptions:
+    - Error
+    operations:
+    - GET /api/dw_projects/costcenters
+    - GET /api/dw_projects/departments
+    - GET /api/dw_projects/projects
+    - GET /api/dw_projects/schools
+gateway_edge_errors:
+- status: 403
+  body: Authentication parameters missing
+  detail: Returned by the 3scale edge on every *.api.aalto.fi host for a credential-free request. Not
+    declared in any contract.
+  method: probed
+  source: https://facilities.api.aalto.fi/api/aalto/facilities/v1/buildings
+observations:
+- Two of five contracts (Aalto people profile api, Aalto Open API (Deprecated)) declare no error response
+  at all.
+- No contract declares the 403 the gateway actually returns to an anonymous caller, so the documented
+  error surface does not match the deployed one.
+- There is no shared error schema across the five products; facilities and Sisu each define their own
+  errorResponse/errorType.

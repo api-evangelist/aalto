@@ -1,0 +1,89 @@
+openapi: 3.2.0
+info:
+  description: 'This API makes publication data from Acris publicly available via 3scale. Research-outputs APIs return data as it is on Acris See full Acris API at https://acris.aalto.fi/ws/api/515/api-docs/index.html
+
+    Research-outputs-enhanced returns data in a more well-formatted manner. It is currently only in use for internal Aalto Usage.'
+  version: Pure v5.15/
+  title: Acris Research Outputs Enhanced API
+  contact:
+    email: it-integ@aalto.fi
+servers:
+- url: https://research.api.aalto.fi/api/acris/v1
+tags:
+- name: research-outputs-enhanced
+paths:
+  /research-output-enhanced:
+    get:
+      security:
+      - USER-KEY: []
+      tags:
+      - research-outputs-enhanced
+      parameters:
+      - name: departmentCode
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: researchGroupCode
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: researchGroupByDepartmentCode
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: startYear
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: endYear
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: Person email
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: Limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: Offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      summary: get enhanced research outputs
+      description: ''
+      operationId: getResearch-output-enhanced
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad Request.
+        '401':
+          description: Authorization required.
+        '404':
+          description: Could not find a publication matching the given filters.
+        '422':
+          description: Unsupported request.
+components:
+  securitySchemes:
+    USER-KEY:
+      type: apiKey
+      name: USER-KEY
+      in: header

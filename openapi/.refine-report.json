@@ -1,0 +1,54 @@
+{
+  "provider": "aalto",
+  "sources": [
+    "_original/aalto-acris-research-api-openapi.json",
+    "_original/aalto-course-sisu-api-openapi.json",
+    "_original/aalto-facilities-api-openapi.json",
+    "_original/aalto-people-profile-api-openapi.json",
+    "_original/aalto-projects-costcenters-api-openapi.json"
+  ],
+  "outputs": [
+    "aalto-research-outputs-api-openapi.yml",
+    "aalto-research-outputs-enhanced-api-openapi.yml",
+    "aalto-sisu-courses-api-openapi.yml",
+    "aalto-buildings-api-openapi.yml",
+    "aalto-reservations-api-openapi.yml",
+    "aalto-groups-api-openapi.yml",
+    "aalto-profiles-api-openapi.yml",
+    "aalto-costcenters-api-openapi.yml",
+    "aalto-organisational-data-api-openapi.yml",
+    "aalto-projects-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (5 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "aalto-acris-research-api-openapi.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "aalto-acris-research-api-openapi.json: declared missing tag: research-outputs",
+    "aalto-acris-research-api-openapi.json: declared missing tag: research-outputs-enhanced",
+    "aalto-course-sisu-api-openapi.json: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "aalto-course-sisu-api-openapi.json: declared missing tag: SISU Courses",
+    "aalto-facilities-api-openapi.json: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "aalto-people-profile-api-openapi.json: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "aalto-people-profile-api-openapi.json: declared missing tag: Groups",
+    "aalto-people-profile-api-openapi.json: declared missing tag: Profiles",
+    "aalto-projects-costcenters-api-openapi.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "aalto-projects-costcenters-api-openapi.json: declared missing tag: Costcenters",
+    "aalto-projects-costcenters-api-openapi.json: declared missing tag: Organisational Data",
+    "aalto-projects-costcenters-api-openapi.json: declared missing tag: Projects",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "aalto-buildings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aalto-costcenters-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aalto-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aalto-organisational-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aalto-profiles-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aalto-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aalto-research-outputs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aalto-research-outputs-enhanced-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aalto-reservations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aalto-sisu-courses-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

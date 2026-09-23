@@ -1,0 +1,78 @@
+openapi: 3.2.0
+info:
+  description: 'Aalto API to query project and cost centers.
+
+
+    parameter=value is interpreted as ''WHERE parameter = ''value''
+
+    parameter=* value* is interpreted as ''WHERE parameter LIKE ''%value%''
+
+    .'
+  version: 1.0.10
+  title: Aalto project and costcenter Costcenters API
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://api.aalto.fi:443
+  description: Prod
+- url: https://aalto-cost-centers-test.api.aalto.fi:443
+  description: Test
+tags:
+- name: Cost Centers
+paths:
+  /api/dw_projects/costcenters:
+    get:
+      tags:
+      - Cost Centers
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: active
+        in: query
+        required: false
+        description: true - if just active projects are needed
+        schema:
+          type: string
+          default: ''
+      - name: CostCenterCode
+        in: query
+        required: false
+        description: Cost center code like U90901
+        schema:
+          type: string
+          default: ''
+      - name: CostCenterName
+        in: query
+        required: false
+        description: 'Cost center name '
+        schema:
+          type: string
+          default: ''
+      - name: DepartmentCode
+        in: query
+        required: false
+        description: Department code
+        schema:
+          type: string
+          default: ''
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request
+        '500':
+          description: Error
+      summary: Get api dw projects costcenters
+      x-summary-source: derived
+      operationId: getApiDwProjectsCostcenters
+      x-operation-id-source: derived
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: X-ApiKey
+      in: header

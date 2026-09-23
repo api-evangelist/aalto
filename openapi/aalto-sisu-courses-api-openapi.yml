@@ -1,0 +1,462 @@
+openapi: 3.2.0
+info:
+  title: Sisu API (replaces /oodiapi) SISU Courses API
+  description: Handles SISU data - course units and realizations
+  version: 0.0.18
+servers:
+- url: https://course.api.aalto.fi:443/api/sisu/v1
+- url: https://course-test.api.aalto.fi:443/api/sisu/v1
+tags:
+- name: SISU Courses
+paths:
+  /courseunits:
+    get:
+      tags:
+      - SISU Courses
+      summary: Retrieve all course units
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Course unit response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/courseunitsType'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      operationId: getCourseunits
+      x-operation-id-source: derived
+  /courseunitrealisations:
+    get:
+      tags:
+      - SISU Courses
+      summary: Retrieve all course unit realizations (with start and end date)
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: code
+        in: query
+        description: Wild card search for code
+        schema:
+          type: string
+      - name: endTimeAfter
+        in: query
+        description: Return all course units which end after the specified time
+        schema:
+          type: string
+      - name: endTimeBefore
+        in: query
+        description: Return all course units which end before the specified time
+        schema:
+          type: string
+      - name: organizationId
+        in: query
+        description: Filter by organization id
+        schema:
+          type: string
+      - name: search
+        in: query
+        description: Searches from course code, name, teacher and summary. Supports multiple keywords
+        schema:
+          type: string
+      - name: startTimeAfter
+        in: query
+        description: Return all course units which start after the specified time
+        schema:
+          type: string
+      - name: startTimeBefore
+        in: query
+        description: Return all course units which start before the specified time
+        schema:
+          type: string
+      - name: unitType
+        in: query
+        description: Filter course units by type
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Limit the size of the result set
+        schema:
+          type: string
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: Course unit realisation response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/courseunitrealisationsType'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+      operationId: getCourseunitrealisations
+      x-operation-id-source: derived
+  /courseunitrealisations/{id}:
+    get:
+      tags:
+      - SISU Courses
+      summary: Retrieve one particular course unit realization using the SISU internal ID
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: 'SISU Course unit realisation id. example aalto-CUR-1148019327-2 '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Course unit realisation response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/courseunitrealisationType'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+      operationId: getCourseunitrealisationsById
+      x-operation-id-source: derived
+  /courseunitrealisations-enhanced:
+    get:
+      tags:
+      - SISU Courses
+      summary: Retrieve detailed course information - only for internal Aalto use
+      parameters:
+      - name: id
+        in: query
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: Filter with course unit types, comma separated
+        schema:
+          type: string
+      - name: endTimeAfter
+        in: query
+        description: Return units which end after the specified date
+        schema:
+          type: string
+          format: date
+      - name: endTimeBefore
+        in: query
+        description: Return units which end before the specified date
+        schema:
+          type: string
+          format: date
+      - name: startTimeAfter
+        in: query
+        description: Return units which start after the specified date
+        schema:
+          type: string
+          format: date
+      - name: startTimeBefore
+        in: query
+        description: Return units which start before the specified date
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: Course unit realisation response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/courseunitrealisations-enhancedType'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+      security:
+      - ApiKeyAuth: []
+      operationId: getCourseunitrealisationsEnhanced
+      x-operation-id-source: derived
+components:
+  schemas:
+    courseunitrealisationsType:
+      type: array
+      items:
+        $ref: '#/components/schemas/courseunitrealisationType'
+    courseunitsType:
+      type: array
+      items:
+        $ref: '#/components/schemas/courseunitType'
+    costCentre:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/langType'
+        share:
+          type: integer
+        code:
+          type: string
+        schoolName:
+          $ref: '#/components/schemas/langType'
+        schoolCode:
+          type: string
+        abbreviation:
+          $ref: '#/components/schemas/langType'
+    courseunitrealisationType:
+      type: object
+      properties:
+        id:
+          type: string
+        code:
+          type: string
+        startDate:
+          type: string
+          example: '2020-08-04T00:00:00.000Z'
+        endDate:
+          type: string
+          example: '2020-08-04T00:00:00.000Z'
+        type:
+          type: string
+        name:
+          $ref: '#/components/schemas/langType'
+        summary:
+          type: object
+          properties:
+            workload:
+              $ref: '#/components/schemas/langType'
+            prerequisites:
+              $ref: '#/components/schemas/langType'
+            learningOutcomes:
+              $ref: '#/components/schemas/langType'
+            literature:
+              $ref: '#/components/schemas/langType'
+            languagegueOfInstructions:
+              $ref: '#/components/schemas/langType'
+            registration:
+              $ref: '#/components/schemas/langType'
+            homepage:
+              $ref: '#/components/schemas/langType'
+            content:
+              $ref: '#/components/schemas/langType'
+            cerfLevel:
+              $ref: '#/components/schemas/langType'
+            level:
+              $ref: '#/components/schemas/langType'
+            teacherInCharge:
+              $ref: '#/components/schemas/langType'
+            assesmentMethods:
+              $ref: '#/components/schemas/langType'
+            courseStatus:
+              $ref: '#/components/schemas/langType'
+            substitutes:
+              $ref: '#/components/schemas/langType'
+            additionalInformation:
+              $ref: '#/components/schemas/langType'
+            gradingScale:
+              $ref: '#/components/schemas/langType'
+            teachingPeriod:
+              $ref: '#/components/schemas/langType'
+        organizationId:
+          type: string
+        credits:
+          type: integer
+        courseUnitId:
+          type: string
+        languageOfInstructionCodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/stringType'
+        teachers:
+          type: array
+          items:
+            $ref: '#/components/schemas/stringType'
+    errorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/errorType'
+    errorType:
+      type: object
+      properties:
+        code:
+          type: number
+        message:
+          type: string
+    courseunitrealisations-enhancedType:
+      type: array
+      items:
+        $ref: '#/components/schemas/courseunitrealisation-enhancedType'
+    courseunitType:
+      type: object
+      properties:
+        code:
+          type: string
+        groupId:
+          type: string
+        id:
+          type: string
+        curriculumPeriodIds:
+          type: array
+          items:
+            type: string
+        name:
+          $ref: '#/components/schemas/langType'
+        organisations:
+          type: array
+          items:
+            type: object
+            properties:
+              organisationId:
+                $ref: '#/components/schemas/stringType'
+              educationalInstitutionUrn:
+                $ref: '#/components/schemas/stringType'
+              roleUrn:
+                $ref: '#/components/schemas/stringType'
+              share:
+                type: integer
+                example: 1
+              validityPeriod:
+                type: object
+                properties: {}
+        validityPeriod.startDate:
+          type: string
+          example: '2020-08-04T00:00:00.000Z'
+        validityPeriod.endDate:
+          type: string
+          example: '2020-08-04T00:00:00.000Z'
+        credits:
+          type: object
+          properties:
+            min:
+              type: integer
+            max:
+              type: integer
+    stringType:
+      type: string
+    error:
+      required:
+      - message
+      type: object
+      properties:
+        message:
+          type: string
+        inner:
+          type: string
+    courseunitrealisation-enhancedType:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          $ref: '#/components/schemas/langType'
+        activityStartDate:
+          type: string
+          example: '2020-08-04T00:00:00.000Z'
+        activityEndDate:
+          type: string
+          example: '2020-08-04T00:00:00.000Z'
+        enrollmentCount:
+          type: string
+        courseCode:
+          type: string
+        teachingLanguage:
+          type: array
+          items:
+            type: string
+        costCentre:
+          type: array
+          items:
+            $ref: '#/components/schemas/costCentre'
+        responsibleTeachers:
+          type: array
+          items:
+            $ref: '#/components/schemas/stringType'
+        responsibleTeachersDetails:
+          type: array
+          items:
+            type: object
+            properties:
+              employeeNumber:
+                type: string
+                example: ATTESTI42
+              eppn:
+                type: string
+                example: testin5@aalto.fi
+        participants:
+          type: array
+          items:
+            type: string
+    langType:
+      type: object
+      properties:
+        fi:
+          type: string
+        sv:
+          type: string
+        en:
+          type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: USER_KEY

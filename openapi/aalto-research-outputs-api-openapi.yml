@@ -1,0 +1,417 @@
+openapi: 3.2.0
+info:
+  description: 'This API makes publication data from Acris publicly available via 3scale. Research-outputs APIs return data as it is on Acris See full Acris API at https://acris.aalto.fi/ws/api/515/api-docs/index.html
+
+    Research-outputs-enhanced returns data in a more well-formatted manner. It is currently only in use for internal Aalto Usage.'
+  version: Pure v5.15/
+  title: Acris Research Outputs API
+  contact:
+    email: it-integ@aalto.fi
+servers:
+- url: https://research.api.aalto.fi/api/acris/v1
+tags:
+- name: research-outputs
+paths:
+  /research-outputs:
+    get:
+      security:
+      - USER-KEY: []
+      tags:
+      - research-outputs
+      summary: Lists all research outputs
+      description: Lists all publicly available research outputs in ACRIS.
+      operationId: listResearchOutputs_2
+      parameters:
+      - name: q
+        in: query
+        description: Free text search string using Lucene query syntax.
+        required: false
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: Limit the fields included in the response. E.g. 'nameVariants.nameVariant' will only return the name variants.
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: order
+        in: query
+        description: 'Specify the ordering of content in the result. Default: ID ascending.'
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - publicationYearAndAuthor
+          - publicationYearAndTypeAndAuthor
+          - created
+          - rating
+          - typeAndAuthor
+          - type
+          - title
+          - typeAndYear
+          - authorLastName
+          - publicationYearAndTypeAndTitle
+          - publicationYear
+          - modified
+          - FIAPublicationOrderByType
+          - category
+          - publicationDate
+          - firstAuthor
+      - name: orderBy
+        in: query
+        description: Choose the directionality of the result. If set, this will override direction on 'Order'.
+        required: false
+        schema:
+          type: string
+          enum:
+          - ascending
+          - descending
+      - name: locale
+        in: query
+        description: Enter the desired locale. E.g. 'en_GB' will only return the English text strings.
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - en_GB
+          - fi_FI
+          - se_SE
+      - name: fallbackLocale
+        in: query
+        description: Fallback locale string. Syntax is 'Locale1=>Locale2' to map Locale1 to Locale2. E.g. 'da_DK=>en_GB'. Locale1 must be equal to the locale provided in the locale string.
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: rendering
+        in: query
+        description: HTML rendering formats. If rendering formats are specified, the content will be returned in these formats instead of XML. If XML is also wanted, it can be included using the fields parameter.
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - portal-short
+          - standard
+          - detailsPortal
+          - mla
+          - author
+          - cbe
+          - authorlist
+          - expertKeywordGroupsPortal
+          - long
+          - BIBTEX
+          - vancouver
+          - ddp_metadata
+          - system
+          - apa
+          - fingerprint
+          - short
+          - harvard
+          - RIS
+          - researchOutputHeader
+      - name: linkingStrategy
+        in: query
+        description: Specify the linking strategy to use when creating HTML renderings.
+        required: false
+        schema:
+          type: string
+          enum:
+          - documentLinkingStrategy
+          - portalLinkingStrategy
+          - ddpLinkingStrategy
+          - noLinkingStrategy
+          - externalSourceIdLinkingStrategy
+      - name: returnUsedContent
+        in: query
+        description: If 'true', the IDs of the content used to create HTML renderings are returned as part of the result.
+        required: false
+        schema:
+          type: boolean
+      - name: navigationLink
+        in: query
+        description: 'Include navigation links for paging and content. Default: true.'
+        required: false
+        schema:
+          type: boolean
+      - name: size
+        in: query
+        description: 'Enter the number of results per window. Default: 10.'
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: 'Enter the offset into the total result set where items should be returned from. Default: 0.'
+        required: false
+        schema:
+          type: integer
+      - name: page
+        in: query
+        description: Enter the desired page number.
+        required: false
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        description: Enter the desired number of results per page.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful operation
+  /research-outputs/{id}:
+    get:
+      security:
+      - USER-KEY: []
+      tags:
+      - research-outputs
+      summary: Get research output
+      description: Get research output with specific ID (path parameter).
+      operationId: getResearchOutput_1
+      parameters:
+      - name: id
+        in: path
+        description: ID of the desired research output
+        required: true
+        schema:
+          type: string
+      - name: idClassificationType
+        in: query
+        description: Give an optional classification type used to specify which type of ID should be used in the match.
+        required: false
+        schema:
+          type: string
+      - name: idClassification
+        in: query
+        description: 'Give an optional classification used to specify which type of ID should be used in the match. '
+        required: false
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: 'Limit the fields included in the response. E.g. ''nameVariants.nameVariant'' will only return the name variants. '
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: locale
+        in: query
+        description: 'Enter the desired locale. E.g. ''en_GB'' will only return the English text strings. '
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - en_GB
+          - fi_FI
+          - se_SE
+      - name: fallbackLocale
+        in: query
+        description: 'Fallback locale string. Syntax is ''Locale1=>Locale2'' to map Locale1 to Locale2. E.g. ''da_DK=>en_GB''. Locale1 must be equal to the locale provided in the locale string. '
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: rendering
+        in: query
+        description: 'HTML rendering formats. If rendering formats are specified, the content will be returned in these formats instead of XML. If XML is also wanted, it can be included using the fields parameter. '
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - portal-short
+          - standard
+          - detailsPortal
+          - mla
+          - author
+          - cbe
+          - authorlist
+          - expertKeywordGroupsPortal
+          - long
+          - BIBTEX
+          - vancouver
+          - ddp_metadata
+          - system
+          - apa
+          - fingerprint
+          - short
+          - harvard
+          - RIS
+          - researchOutputHeader
+      - name: returnUsedContent
+        in: query
+        description: 'If ''true'', the IDs of the content used to create HTML renderings are returned as part of the result. '
+        required: false
+        schema:
+          type: boolean
+      - name: navigationLink
+        in: query
+        description: 'Include navigation links for paging and content. Default: true.'
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Successful operation
+        '404':
+          description: Resource not found
+  /research-outputs/{id}/fingerprints:
+    get:
+      tags:
+      - research-outputs
+      security:
+      - USER-KEY: []
+      summary: Lists impacts on a research output
+      description: Lists all fingerprints associated to the research-output specified by an ID (supplied as path parameter).
+      operationId: listResearchOutputFingerprints_1
+      parameters:
+      - name: id
+        in: path
+        description: ID
+        required: true
+        schema:
+          type: string
+      - name: idClassificationType
+        in: query
+        description: 'Give an optional classification type used to specify which type of ID should be used in the match. '
+        required: false
+        schema:
+          type: string
+      - name: idClassification
+        in: query
+        description: 'Give an optional classification used to specify which type of ID should be used in the match. '
+        required: false
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: 'Limit the fields included in the response. E.g. ''nameVariants.nameVariant'' will only return the name variants. '
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: order
+        in: query
+        description: 'Specify the ordering of content in the result. Default: ID ascending. '
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: orderBy
+        in: query
+        description: 'Choose the directionality of the result. If set, this will override direction on ''Order''. '
+        required: false
+        schema:
+          type: string
+          enum:
+          - ascending
+          - descending
+      - name: locale
+        in: query
+        description: Enter the desired locale. E.g. 'en_GB' will only return the English text strings.
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - en_GB
+          - fi_FI
+          - se_SE
+      - name: fallbackLocale
+        in: query
+        description: Fallback locale string. Syntax is 'Locale1=>Locale2' to map Locale1 to Locale2. E.g. 'da_DK=>en_GB'. Locale1 must be equal to the locale provided in the locale string.
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: rendering
+        in: query
+        description: HTML rendering formats. If rendering formats are specified, the content will be returned in these formats instead of XML. If XML is also wanted, it can be included using the fields parameter.
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - ddp_metadata
+          - system
+      - name: returnUsedContent
+        in: query
+        description: 'If ''true'', the IDs of the content used to create HTML renderings are returned as part of the result. '
+        required: false
+        schema:
+          type: boolean
+      - name: navigationLink
+        in: query
+        description: 'Include navigation links for paging and content. Default: true. '
+        required: false
+        schema:
+          type: boolean
+      - name: size
+        in: query
+        description: 'Enter the number of results per window. Default: 10. '
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: 'Enter the offset into the total result set where items should be returned from. Default: 0. '
+        required: false
+        schema:
+          type: integer
+      - name: page
+        in: query
+        description: 'Enter the desired page number. '
+        required: false
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        description: 'Enter the desired number of results per page. '
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful operation
+        '404':
+          description: Resource not found
+components:
+  securitySchemes:
+    USER-KEY:
+      type: apiKey
+      name: USER-KEY
+      in: header

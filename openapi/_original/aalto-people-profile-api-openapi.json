@@ -1,0 +1,82 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Aalto people profile api",
+    "description": "Proxy for Aaltopeople API, used to fetch groups or people.",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "it-integ@aalto.fi"
+    },
+    "version": "1.0.3"
+  },
+  "servers": [
+    {
+      "url": "https://aaltopeople.api.aalto.fi/api/aaltopeople/v1"
+    }
+  ],
+  "paths": {
+    "/groups": {
+      "get": {
+        "summary": "get groups",
+        "operationId": "getGroups",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Example",
+            "content": {}
+          }
+        },
+        "tags": [
+          "Groups"
+        ]
+      }
+    },
+    "/profiles": {
+      "get": {
+        "summary": "get user profile",
+        "operationId": "getExample",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Example",
+            "content": {}
+          }
+        },
+        "tags": [
+          "Profiles"
+        ]
+      }
+    }
+  },
+  "components": {}
+}

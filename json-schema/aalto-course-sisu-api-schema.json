@@ -1,0 +1,369 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aalto/main/json-schema/aalto-course-sisu-api-schema.json",
+  "title": "Sisu API (replaces /oodiapi) — component schemas",
+  "description": "JSON Schema extracted verbatim from components.schemas of Aalto University's own OpenAPI for Sisu API (replaces /oodiapi) (version 0.0.18), published on the Aalto API Gateway public ActiveDocs index. Structural conversion only — no schema was authored here.",
+  "x-generated": "2026-08-30",
+  "x-method": "derived",
+  "x-source": "https://raw.githubusercontent.com/api-evangelist/aalto/main/openapi/_original/aalto-course-sisu-api-openapi.json",
+  "x-operator": "institution",
+  "$defs": {
+    "error": {
+      "required": [
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "inner": {
+          "type": "string"
+        }
+      }
+    },
+    "errorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/components/schemas/errorType"
+        }
+      }
+    },
+    "errorType": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "number"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "costCentre": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/components/schemas/langType"
+        },
+        "share": {
+          "type": "integer"
+        },
+        "code": {
+          "type": "string"
+        },
+        "schoolName": {
+          "$ref": "#/components/schemas/langType"
+        },
+        "schoolCode": {
+          "type": "string"
+        },
+        "abbreviation": {
+          "$ref": "#/components/schemas/langType"
+        }
+      }
+    },
+    "courseunitrealisations-enhancedType": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/courseunitrealisation-enhancedType"
+      }
+    },
+    "courseunitrealisation-enhancedType": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "$ref": "#/components/schemas/langType"
+        },
+        "activityStartDate": {
+          "type": "string",
+          "example": "2020-08-04T00:00:00.000Z"
+        },
+        "activityEndDate": {
+          "type": "string",
+          "example": "2020-08-04T00:00:00.000Z"
+        },
+        "enrollmentCount": {
+          "type": "string"
+        },
+        "courseCode": {
+          "type": "string"
+        },
+        "teachingLanguage": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "costCentre": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/costCentre"
+          }
+        },
+        "responsibleTeachers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/stringType"
+          }
+        },
+        "responsibleTeachersDetails": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "employeeNumber": {
+                "type": "string",
+                "example": "ATTESTI42"
+              },
+              "eppn": {
+                "type": "string",
+                "example": "testin5@aalto.fi"
+              }
+            }
+          }
+        },
+        "participants": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "courseunitrealisationparticipantType": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "documentState": {
+          "type": "string"
+        },
+        "studentNumber": {
+          "type": "string"
+        },
+        "firstNames": {
+          "type": "string"
+        },
+        "callName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "eduPersonPrincipalName": {
+          "type": "string"
+        },
+        "primaryEmail": {
+          "type": "string"
+        },
+        "secondaryEmail": {
+          "type": "string"
+        }
+      }
+    },
+    "courseunitType": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "groupId": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "curriculumPeriodIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "$ref": "#/components/schemas/langType"
+        },
+        "organisations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "organisationId": {
+                "$ref": "#/components/schemas/stringType"
+              },
+              "educationalInstitutionUrn": {
+                "$ref": "#/components/schemas/stringType"
+              },
+              "roleUrn": {
+                "$ref": "#/components/schemas/stringType"
+              },
+              "share": {
+                "type": "integer",
+                "example": 1
+              },
+              "validityPeriod": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "validityPeriod.startDate": {
+          "type": "string",
+          "example": "2020-08-04T00:00:00.000Z"
+        },
+        "validityPeriod.endDate": {
+          "type": "string",
+          "example": "2020-08-04T00:00:00.000Z"
+        },
+        "credits": {
+          "type": "object",
+          "properties": {
+            "min": {
+              "type": "integer"
+            },
+            "max": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "langType": {
+      "type": "object",
+      "properties": {
+        "fi": {
+          "type": "string"
+        },
+        "sv": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        }
+      }
+    },
+    "stringType": {
+      "type": "string"
+    },
+    "courseunitrealisationsType": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/courseunitrealisationType"
+      }
+    },
+    "courseunitsType": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/courseunitType"
+      }
+    },
+    "courseunitrealisationType": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "startDate": {
+          "type": "string",
+          "example": "2020-08-04T00:00:00.000Z"
+        },
+        "endDate": {
+          "type": "string",
+          "example": "2020-08-04T00:00:00.000Z"
+        },
+        "type": {
+          "type": "string"
+        },
+        "name": {
+          "$ref": "#/components/schemas/langType"
+        },
+        "summary": {
+          "type": "object",
+          "properties": {
+            "workload": {
+              "$ref": "#/components/schemas/langType"
+            },
+            "prerequisites": {
+              "$ref": "#/components/schemas/langType"
+            },
+            "learningOutcomes": {
+              "$ref": "#/components/schemas/langType"
+            },
+            "literature": {
+              "$ref": "#/components/schemas/langType"
+            },
+            "languagegueOfInstructions": {
+              "$ref": "#/components/schemas/langType"
+            },
+            "registration": {
+              "$ref": "#/components/schemas/langType"
+            },
+            "homepage": {
+              "$ref": "#/components/schemas/langType"
+            },
+            "content": {
+              "$ref": "#/components/schemas/langType"
+            },
+            "cerfLevel": {
+              "$ref": "#/components/schemas/langType"
+            },
+            "level": {
+              "$ref": "#/components/schemas/langType"
+            },
+            "teacherInCharge": {
+              "$ref": "#/components/schemas/langType"
+            },
+            "assesmentMethods": {
+              "$ref": "#/components/schemas/langType"
+            },
+            "courseStatus": {
+              "$ref": "#/components/schemas/langType"
+            },
+            "substitutes": {
+              "$ref": "#/components/schemas/langType"
+            },
+            "additionalInformation": {
+              "$ref": "#/components/schemas/langType"
+            },
+            "gradingScale": {
+              "$ref": "#/components/schemas/langType"
+            },
+            "teachingPeriod": {
+              "$ref": "#/components/schemas/langType"
+            }
+          }
+        },
+        "organizationId": {
+          "type": "string"
+        },
+        "credits": {
+          "type": "integer"
+        },
+        "courseUnitId": {
+          "type": "string"
+        },
+        "languageOfInstructionCodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/stringType"
+          }
+        },
+        "teachers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/stringType"
+          }
+        }
+      }
+    }
+  }
+}

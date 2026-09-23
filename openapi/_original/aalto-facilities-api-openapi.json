@@ -1,0 +1,634 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Aalto facilities api",
+    "description": "Aalto API to query Aalto facility data",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "it-integ@aalto.fi"
+    },
+    "version": "1.0.2"
+  },
+  "servers": [
+    {
+      "url": "https://facilities.api.aalto.fi/api/aalto",
+      "description": "PROD"
+    },
+    {
+      "url": "https://facilities-test.api.aalto.fi/api/aalto",
+      "description": "TEST"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Reservations",
+      "description": "Room reservations."
+    },
+    {
+      "name": "Buildings",
+      "description": "Aalto Building related data"
+    }
+  ],
+  "paths": {
+    "/facilities/v1/buildings/{code}": {
+      "get": {
+        "tags": [
+          "Buildings"
+        ],
+        "summary": "Find building information by id",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "description": "Building code",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "includeBookingStatus",
+            "in": "query",
+            "description": "Include booking status in the response",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "noCache",
+            "in": "query",
+            "description": "Disable cache",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "user_key",
+            "in": "query",
+            "description": "Aalto API gateway user key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/buildingDetailsType"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/facilities/v1/buildings": {
+      "get": {
+        "tags": [
+          "Buildings"
+        ],
+        "summary": "Retreive information about all buildings",
+        "parameters": [
+          {
+            "name": "noCache",
+            "in": "query",
+            "description": "Disable cache",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "showAll",
+            "in": "query",
+            "description": "If true, return all buildings. If not set only returns buildings that are set visible in Asio",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "user_key",
+            "in": "query",
+            "description": "Aalto API gateway user key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/buildingsType"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/facilities/v1/building": {
+      "get": {
+        "tags": [
+          "Buildings"
+        ],
+        "summary": "Retrieve detailed building information",
+        "parameters": [
+          {
+            "name": "buildingCode",
+            "in": "query",
+            "description": "Building code",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "includeBookingStatus",
+            "in": "query",
+            "description": "Include booking status in the response",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "address",
+            "in": "query",
+            "description": "Building street address",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "zipCode",
+            "in": "query",
+            "description": "Building address zip code",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "noCache",
+            "in": "query",
+            "description": "Disable cache",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "user_key",
+            "in": "query",
+            "description": "Aalto API gateway user key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/buildingDetailsType"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reservations/v1/reservations/{id}": {
+      "get": {
+        "tags": [
+          "Reservations"
+        ],
+        "summary": "Find a reservation by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "user_key",
+            "in": "query",
+            "description": "Aalto API gateway user key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          },
+          "404": {
+            "description": "Could not find a reservation matching the given id",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              },
+              "example": {
+                "example": {
+                  "error": "Could not find a reservation matching the given id"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reservations/v1/reservations": {
+      "get": {
+        "tags": [
+          "Reservations"
+        ],
+        "summary": "Return all of the reservations",
+        "operationId": "getReservations",
+        "parameters": [
+          {
+            "name": "spaceCodes",
+            "in": "query",
+            "description": "Comma-separated list of space identifiers",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "search from YYYY-MM-DD",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "search to YYYY-MM-DD",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "phoneNumber",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_key",
+            "in": "query",
+            "description": "Aalto API gateway user key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Reservation"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              },
+              "example": {
+                "example": {
+                  "error": "Invalid start date"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Reservation": {
+        "required": [
+          "name",
+          "phoneNumber",
+          "spaceCode"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "example": 123456780
+          },
+          "name": {
+            "type": "string",
+            "description": "Event name",
+            "example": "TEST Event"
+          },
+          "buildingCode": {
+            "type": "string",
+            "example": "R001"
+          },
+          "spaceCode": {
+            "type": "string",
+            "description": "Code of the reserved space. Normally room number",
+            "example": "U598"
+          },
+          "date": {
+            "type": "string",
+            "description": "Reservation date (e.g. 2020-12-25)",
+            "format": "date",
+            "example": "2020-12-25T00:00:00.000Z"
+          },
+          "startTime": {
+            "type": "string",
+            "description": "Reservation start time (e.g. 14:00)",
+            "example": 840
+          },
+          "endTime": {
+            "type": "string",
+            "description": "Reservation end time (e.g. 14:30)",
+            "example": 870
+          },
+          "duration": {
+            "type": "integer",
+            "description": "Duration in minutes",
+            "format": "int64",
+            "example": 30
+          },
+          "persons": {
+            "type": "integer",
+            "description": "Number of persons",
+            "format": "int64",
+            "example": 1
+          },
+          "type": {
+            "type": "string",
+            "description": "Usage type. Possible values are Internal (S), Planning (L), Student (A), External (H)",
+            "example": "Student"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "example": 123456789
+          },
+          "email": {
+            "type": "string",
+            "example": "example@email.com"
+          }
+        },
+        "description": "Represents a reservation."
+      },
+      "errorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/errorType"
+          }
+        }
+      },
+      "errorType": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "number"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "buildingsType": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/buildingType"
+        }
+      },
+      "buildingType": {
+        "type": "object",
+        "properties": {
+          "buildingCode": {
+            "type": "string"
+          },
+          "nickName": {
+            "$ref": "#/components/schemas/nickNameType"
+          },
+          "address": {
+            "$ref": "#/components/schemas/addressType"
+          }
+        }
+      },
+      "nickNameType": {
+        "type": "object",
+        "properties": {
+          "fi": {
+            "type": "string"
+          },
+          "sv": {
+            "type": "string"
+          },
+          "en": {
+            "type": "string"
+          }
+        }
+      },
+      "addressType": {
+        "type": "object",
+        "properties": {
+          "addressLine": {
+            "type": "string"
+          },
+          "postalCode": {
+            "type": "string"
+          },
+          "municipality": {
+            "type": "string"
+          }
+        }
+      },
+      "buildingDetailsType": {
+        "type": "object",
+        "properties": {
+          "buildingCode": {
+            "type": "string"
+          },
+          "nickName": {
+            "$ref": "#/components/schemas/nickNameType"
+          },
+          "address": {
+            "$ref": "#/components/schemas/addressType"
+          },
+          "openingHours": {
+            "$ref": "#/components/schemas/openingHoursType"
+          },
+          "Rooms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoomType"
+            }
+          }
+        }
+      },
+      "openingHoursType": {
+        "type": "object",
+        "properties": {
+          "ma": {
+            "$ref": "#/components/schemas/dailyOpeningHoursType"
+          },
+          "ti": {
+            "$ref": "#/components/schemas/dailyOpeningHoursType"
+          },
+          "ke": {
+            "$ref": "#/components/schemas/dailyOpeningHoursType"
+          },
+          "to": {
+            "$ref": "#/components/schemas/dailyOpeningHoursType"
+          },
+          "pe": {
+            "$ref": "#/components/schemas/dailyOpeningHoursType"
+          },
+          "la": {
+            "$ref": "#/components/schemas/dailyOpeningHoursType"
+          },
+          "su": {
+            "$ref": "#/components/schemas/dailyOpeningHoursType"
+          }
+        }
+      },
+      "dailyOpeningHoursType": {
+        "type": "object",
+        "properties": {
+          "aklo": {
+            "type": "string"
+          },
+          "lklo": {
+            "type": "string"
+          }
+        }
+      },
+      "RoomType": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string"
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "coordinates": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "currentBookingStatus": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

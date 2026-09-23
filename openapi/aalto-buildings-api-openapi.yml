@@ -1,0 +1,268 @@
+openapi: 3.2.0
+info:
+  title: Aalto facilities Buildings API
+  description: Aalto API to query Aalto facility data
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: it-integ@aalto.fi
+  version: 1.0.2
+servers:
+- url: https://facilities.api.aalto.fi/api/aalto
+  description: PROD
+- url: https://facilities-test.api.aalto.fi/api/aalto
+  description: TEST
+tags:
+- name: Buildings
+  description: Aalto Building related data
+paths:
+  /facilities/v1/buildings/{code}:
+    get:
+      tags:
+      - Buildings
+      summary: Find building information by id
+      parameters:
+      - name: code
+        in: path
+        description: Building code
+        required: true
+        schema:
+          type: string
+      - name: includeBookingStatus
+        in: query
+        description: Include booking status in the response
+        schema:
+          type: boolean
+      - name: noCache
+        in: query
+        description: Disable cache
+        schema:
+          type: boolean
+      - name: user_key
+        in: query
+        description: Aalto API gateway user key
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/buildingDetailsType'
+        '400':
+          description: Bad request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+        '500':
+          description: Internal server error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+      operationId: getFacilitiesV1BuildingsByCode
+      x-operation-id-source: derived
+  /facilities/v1/buildings:
+    get:
+      tags:
+      - Buildings
+      summary: Retreive information about all buildings
+      parameters:
+      - name: noCache
+        in: query
+        description: Disable cache
+        schema:
+          type: boolean
+      - name: showAll
+        in: query
+        description: If true, return all buildings. If not set only returns buildings that are set visible in Asio
+        schema:
+          type: boolean
+          default: false
+      - name: user_key
+        in: query
+        description: Aalto API gateway user key
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/buildingsType'
+        '400':
+          description: Bad request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+        '500':
+          description: Internal server error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+      operationId: getFacilitiesV1Buildings
+      x-operation-id-source: derived
+  /facilities/v1/building:
+    get:
+      tags:
+      - Buildings
+      summary: Retrieve detailed building information
+      parameters:
+      - name: buildingCode
+        in: query
+        description: Building code
+        required: true
+        schema:
+          type: string
+      - name: includeBookingStatus
+        in: query
+        description: Include booking status in the response
+        schema:
+          type: boolean
+      - name: address
+        in: query
+        description: Building street address
+        schema:
+          type: string
+      - name: zipCode
+        in: query
+        description: Building address zip code
+        schema:
+          type: string
+      - name: noCache
+        in: query
+        description: Disable cache
+        schema:
+          type: boolean
+      - name: user_key
+        in: query
+        description: Aalto API gateway user key
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/buildingDetailsType'
+        '400':
+          description: Bad request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+        '500':
+          description: Internal server error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+      operationId: getFacilitiesV1Building
+      x-operation-id-source: derived
+components:
+  schemas:
+    buildingType:
+      type: object
+      properties:
+        buildingCode:
+          type: string
+        nickName:
+          $ref: '#/components/schemas/nickNameType'
+        address:
+          $ref: '#/components/schemas/addressType'
+    RoomType:
+      type: object
+      properties:
+        ID:
+          type: string
+        categories:
+          type: array
+          items:
+            type: string
+        coordinates:
+          type: array
+          items:
+            type: number
+        currentBookingStatus:
+          type: string
+    buildingDetailsType:
+      type: object
+      properties:
+        buildingCode:
+          type: string
+        nickName:
+          $ref: '#/components/schemas/nickNameType'
+        address:
+          $ref: '#/components/schemas/addressType'
+        openingHours:
+          $ref: '#/components/schemas/openingHoursType'
+        Rooms:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoomType'
+    errorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/errorType'
+    dailyOpeningHoursType:
+      type: object
+      properties:
+        aklo:
+          type: string
+        lklo:
+          type: string
+    openingHoursType:
+      type: object
+      properties:
+        ma:
+          $ref: '#/components/schemas/dailyOpeningHoursType'
+        ti:
+          $ref: '#/components/schemas/dailyOpeningHoursType'
+        ke:
+          $ref: '#/components/schemas/dailyOpeningHoursType'
+        to:
+          $ref: '#/components/schemas/dailyOpeningHoursType'
+        pe:
+          $ref: '#/components/schemas/dailyOpeningHoursType'
+        la:
+          $ref: '#/components/schemas/dailyOpeningHoursType'
+        su:
+          $ref: '#/components/schemas/dailyOpeningHoursType'
+    buildingsType:
+      type: array
+      items:
+        $ref: '#/components/schemas/buildingType'
+    errorType:
+      type: object
+      properties:
+        code:
+          type: number
+        message:
+          type: string
+    nickNameType:
+      type: object
+      properties:
+        fi:
+          type: string
+        sv:
+          type: string
+        en:
+          type: string
+    addressType:
+      type: object
+      properties:
+        addressLine:
+          type: string
+        postalCode:
+          type: string
+        municipality:
+          type: string

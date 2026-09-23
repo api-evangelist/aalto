@@ -1,0 +1,128 @@
+---
+name: Aalto University — Domain Standard Conformance
+description: >-
+  Education-regime standard conformance for Aalto University, established by live probe of
+  institution-operated hosts on 2026-08-30. Reward-only: a standard appears here only where a
+  credential-free request returned a response that proves the deployment. Standards in the education
+  regime with no evidence found are listed under not_found rather than left implicit.
+generated: '2026-08-30'
+method: probed
+source: live probes of aaltodoc.aalto.fi and idp.aalto.fi, 2026-08-30
+x-operator: institution
+url: https://raw.githubusercontent.com/api-evangelist/aalto/main/conformance/aalto-conformance.yml
+regime: education
+
+conformance:
+  - standard: oai-pmh
+    status: conformant
+    version: '2.0'
+    operator: institution
+    evidence:
+      url: https://aaltodoc.aalto.fi/server/oai/request?verb=Identify
+      status: 200
+      location: OAI-PMH/Identify/protocolVersion
+      value: '2.0'
+      detail: >-
+        repositoryName "Aaltodoc publication archive", baseURL
+        https://aaltodoc.aalto.fi/server/oai/request, repositoryIdentifier aaltodoc.aalto.fi,
+        earliestDatestamp 2011-09-27T11:35:20Z, granularity YYYY-MM-DDThh:mm:ssZ.
+    supporting:
+      - url: https://aaltodoc.aalto.fi/server/oai/request?verb=ListMetadataFormats
+        status: 200
+        location: OAI-PMH/ListMetadataFormats/metadataFormat/metadataPrefix
+        value: oai_dc, qdc, qdc_finna, qdc_kk, qdc_all, mods, mets, didl, ore, dim, xoai, rdf, marc, rioxx, uketd_dc, etdms
+        detail: >-
+          Sixteen metadata formats served, including rioxx v3.0 and etdms — an OpenAIRE-oriented
+          configuration, not a bare DSpace default.
+    note: >-
+      The published pointer https://aaltodoc.aalto.fi/oai/request 301s to /server/oai/request under
+      DSpace 9.2. Both resolve; the /server path is canonical.
+
+  - standard: saml
+    status: conformant
+    version: '2.0'
+    operator: institution
+    evidence:
+      url: https://idp.aalto.fi/idp/shibboleth
+      status: 200
+      location: md:EntityDescriptor/md:IDPSSODescriptor/@protocolSupportEnumeration
+      value: urn:oasis:names:tc:SAML:2.0:protocol
+      detail: >-
+        entityID https://idp.aalto.fi/idp/shibboleth, mdrpi:RegistrationInfo registrationAuthority
+        http://www.aalto.fi registered 2019-04-15, mdui:DisplayName "Aalto University", X.509 signing
+        certificate issued to CN=idp.aalto.fi, O=Aalto University, OU=IT Services, Espoo, FI.
+
+  - standard: shibboleth
+    status: conformant
+    operator: institution
+    evidence:
+      url: https://idp.aalto.fi/idp/shibboleth
+      status: 200
+      location: md:IDPSSODescriptor/md:Extensions/shibmd:Scope
+      value: aalto.fi
+      detail: >-
+        Shibboleth-specific metadata extensions (shibmd:Scope, mdui:DiscoHints with DomainHint
+        aalto.fi and IPHint 130.233.0.0/16) confirm a Shibboleth IdP rather than a generic SAML
+        endpoint.
+    supporting:
+      - url: https://haka.funet.fi/metadata/haka-metadata.xml
+        status: 200
+        location: EntitiesDescriptor/EntityDescriptor/@entityID
+        value: 41 entityIDs scoped to Aalto
+        detail: >-
+          Aalto is a registered member of Haka, Finland's higher-education SAML federation, with one
+          IdP (idp.aalto.fi) and forty service providers including mycourses.aalto.fi,
+          version.aalto.fi, exam.aalto.fi, wiki.aalto.fi and the cs.aalto.fi teaching services.
+          Haka feeds eduGAIN, so these entities are internationally resolvable.
+
+  - standard: orcid
+    status: deployed
+    operator: institution
+    evidence:
+      url: https://aaltodoc.aalto.fi/server/api/integration/externalsources
+      status: 200
+      location: _embedded.externalsources[].id
+      value: orcidWorks
+      detail: >-
+        Aaltodoc's DSpace 9.2 deployment exposes an ORCID works external-source integration on a
+        public, unauthenticated endpoint. This is a DSpace-provided integration that Aalto has
+        deployed and left publicly readable — evidence of deployment, not of Aalto-authored
+        conformance work.
+
+  - standard: datacite
+    status: deployed
+    operator: institution
+    evidence:
+      url: https://aaltodoc.aalto.fi/server/api/integration/externalsources
+      status: 200
+      location: _embedded.externalsources[].id
+      value: datacite, dataciteProject
+      detail: Same qualification as orcid — a deployed DSpace integration, publicly reachable.
+
+  - standard: crossref
+    status: deployed
+    operator: institution
+    evidence:
+      url: https://aaltodoc.aalto.fi/server/api/integration/externalsources
+      status: 200
+      location: _embedded.externalsources[].id
+      value: crossref
+      detail: Same qualification as orcid — a deployed DSpace integration, publicly reachable.
+
+not_found:
+  - standard: scim
+    detail: No SCIM 2.0 endpoint or /ServiceProviderConfig found on any Aalto host.
+  - standard: lti
+    detail: >-
+      mycourses.aalto.fi is an Aalto-hosted Moodle and Moodle ships LTI, but no LTI registration,
+      platform configuration or tool-configuration document was publicly reachable, so no claim is made.
+  - standard: oneroster
+    detail: Not found. Finnish student data interchange runs through SISU/Opintopolku, not OneRoster.
+  - standard: ed-fi
+    detail: Not found — Ed-Fi is a US K-12 ecosystem with no Finnish HE presence.
+  - standard: caliper
+    detail: Not found.
+  - standard: qti
+    detail: >-
+      exam.aalto.fi (EXAM, the Finnish HE exam system) is registered in Haka but exposes no public
+      QTI interface; no evidence found.

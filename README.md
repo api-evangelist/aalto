@@ -64,54 +64,95 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Aalto University is a multidisciplinary public research university in Espoo, Finland, ranked #113 in the QS World University Rankings 2025. This repository catalogs Aalto's public developer and API footprint as an [APIs.json](http://apisjson.org) profile. That footprint is modest and research-oriented: an authentication-gated Aalto API Gateway (3scale) carrying course/student-system APIs, a Linked Open Aalto Data SPARQL service, and the Aaltodoc institutional repository with OAI-PMH and REST access.
+Aalto University is a multidisciplinary public research university in Espoo, Finland. This repository catalogs Aalto's public developer and API footprint as an [APIs.json](http://apisjson.org) profile, profiled under the API Evangelist university pipeline — which settles **who operates each surface** before anything is saved.
+
+Aalto is unusual in this cohort: it runs a real institution-owned API program rather than only a set of vendor tenancies. Its Red Hat 3scale gateway leaves the ActiveDocs index open without credentials, exposing forty-four Aalto-authored Swagger/OpenAPI documents whose servers all sit under `*.api.aalto.fi`. Every gateway endpoint is API-key gated and returns `403` to an anonymous caller — so the contracts are public and the data is not. The genuinely anonymous surfaces are the Aaltodoc repository (OAI-PMH 2.0 + DSpace 9.2 REST) and the Linked Open Aalto Data SPARQL endpoint.
 
 - APIs.json: https://raw.githubusercontent.com/api-evangelist/aalto/refs/heads/main/apis.yml
 - Run it with Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=aalto-api-evangelist&utm_content=repo
 
 ## Type
 
-- Index / Consumer / 3rd-Party
+- University / Public Research University / Index / Provider / 1st-Party
 
 ## Tags
 
-Education, Higher Education, University, Research, Open Data, Linked Data, Finland
+University, Higher Education, Education, Finland, Europe, Public Research University, Research, Research Data, Open Data, Linked Data, Course Catalog, Identity Federation, Research Computing, Library, API Gateway
 
-## APIs
+## Institution-operated surfaces
 
-- **Aalto API Gateway** — 3scale gateway exposing interfaces about Aalto and its operations (Oodi, ASIO); Aalto account / VPN required. Docs: https://www.aalto.fi/en/services/api-gateway-application-programming-interface
-- **Open Courses API (SISU)** — course/realization data from the SISU student information system; Swagger published but spec and calls are gated. Docs: https://3scale.apps.ocp4.aalto.fi/docs/swagger/open_courses_sisu
-- **Linked Open Aalto Data (SPARQL)** — public SPARQL endpoint, Linked Data browser, and dataset downloads. Docs: https://data.aalto.fi/ — endpoint: http://ldf.fi/loa/sparql
-- **Aaltodoc Repository (OAI-PMH and REST)** — DSpace institutional repository with OAI-PMH 2.0 and REST API. Docs: https://www.aalto.fi/en/open-science-and-research/aaltodoc-publication-archive
+These are Aalto's own. The contracts below are saved in `openapi/`, with pristine copies in `openapi/_original/`.
 
-## Plans
+- **Aalto API Gateway** — Red Hat 3scale at `3scale.apps.ocp4.aalto.fi` (front door `apiportal.aalto.fi`); five documented API products, forty-four specs in the public ActiveDocs index. Key issuance requires an Aalto account.
+- **Aalto Facilities API** — buildings, opening hours, rooms and reservations. OpenAPI 3.0.1 · `facilities.api.aalto.fi`
+- **Aalto Course API (SISU)** — course units and realisations. OpenAPI 3.0.1 · `course.api.aalto.fi`
+- **Aalto Research Publications API (Acris gateway)** — Aalto's own four-path wrapper over its Pure data. OpenAPI 3.0.0 · `research.api.aalto.fi`
+- **Aalto Projects and Cost Centers API** — cost centres, projects, departments, schools. OpenAPI 3.0.0 · `api.aalto.fi`
+- **Aalto People Profile API** — groups and public staff profiles. OpenAPI 3.0.1 · `aaltopeople.api.aalto.fi`
+- **Aalto Open API (Course, Oodi)** — *deprecated*; Aalto says "should not be used", superseded by the SISU API. No spec saved.
+- **Aaltodoc Repository** — Aalto-hosted DSpace 9.2; OAI-PMH 2.0 and REST, both anonymous and verified live.
+- **Shibboleth Identity Provider** — `https://idp.aalto.fi/idp/shibboleth`, scope `aalto.fi`; 41 Aalto entities registered in the Haka federation, onward to eduGAIN.
 
+## Tenant surfaces (Aalto's data, a vendor's contract)
+
+Recorded as relationships. **No vendor specification is saved under Aalto's name.**
+
+- **Acris / research.aalto.fi** — Elsevier Pure research information system and portal.
+- **primo.aalto.fi, aalto.alma.exlibrisgroup.com, aalto.finna.fi** — Ex Libris Primo/Alma and the national Finna discovery platform.
+- **sisu.aalto.fi** — SISU student information system, built by Funidata.
+- **ldf.fi/loa** — Linked Open Aalto Data SPARQL, served on the shared Linked Data Finland platform.
+
+## Domain standard conformance (education regime)
+
+Verified by live probe — see [conformance/aalto-conformance.yml](conformance/aalto-conformance.yml).
+
+- `oai-pmh` 2.0 · `saml` 2.0 · `shibboleth` — conformant, evidenced
+- `orcid`, `datacite`, `crossref` — deployed via Aaltodoc's public DSpace integrations
+- `scim`, `lti`, `oneroster`, `ed-fi`, `caliper`, `qti` — not found
+
+## Artifacts
+
+- [openapi/](openapi/) + [openapi/_original/](openapi/_original/)
+- [json-schema/](json-schema/)
+- [authentication/aalto-authentication.yml](authentication/aalto-authentication.yml)
+- [conformance/aalto-conformance.yml](conformance/aalto-conformance.yml)
+- [errors/aalto-errors.yml](errors/aalto-errors.yml)
+- [lifecycle/aalto-lifecycle.yml](lifecycle/aalto-lifecycle.yml)
 - [plans/aalto-plans-pricing.yml](plans/aalto-plans-pricing.yml)
-
-## Rate Limits
-
 - [rate-limits/aalto-rate-limits.yml](rate-limits/aalto-rate-limits.yml)
-
-## FinOps
-
 - [finops/aalto-finops.yml](finops/aalto-finops.yml)
+- [security/aalto-domain-security.yml](security/aalto-domain-security.yml)
+- [provenance.yml](provenance.yml) — who wrote each file here
+- [review.yml](review.yml) — the probe evidence table
 
 ## Timestamps
 
 - Created: 2026-06-03
-- Modified: 2026-06-03
+- Modified: 2026-08-30
 
 ## Common Properties
 
 - Website: https://www.aalto.fi/en
-- Developer Portal: https://apiportal.aalto.fi/
+- Developer Portal: https://3scale.apps.ocp4.aalto.fi/
+- API Reference: https://3scale.apps.ocp4.aalto.fi/docs
+- Open Data: https://data.aalto.fi/
+- Research Repository: https://aaltodoc.aalto.fi/
+- Identity Federation: https://idp.aalto.fi/idp/shibboleth
+- Research Computing: https://scicomp.aalto.fi/
+- AI Policy: https://www.aalto.fi/en/services/ai-in-aalto
+- AI Tooling: https://ai.aalto.fi/
+- Source Code: https://version.aalto.fi/ (Aalto-operated GitLab)
 - GitHub: https://github.com/AaltoSciComp
+- Privacy: https://www.aalto.fi/en/aalto-handbook/privacy-notice-for-aaltofi
 - LinkedIn: https://www.linkedin.com/school/aalto-university/
-- Review: [review.yml](review.yml)
 
 ## Notes
 
-All URLs were probed on 2026-06-03. The API Gateway and Open Courses (SISU) API resolve but require an Aalto account to view specifications or make calls — no anonymous endpoints were confirmed. The Linked Open Aalto Data SPARQL endpoint, the Aaltodoc OAI-PMH endpoint, and the Aaltodoc DSpace REST API are publicly reachable and were verified live. The `AaltoUniversity` GitHub org exists but has no public repositories, so `AaltoSciComp` (169 public repos) is listed as the active public org. No endpoints were fabricated.
+All URLs were re-probed on 2026-08-30 and the evidence table is in [review.yml](review.yml). Two things a status code alone would have got wrong, both recorded: the Linked Open Aalto Data SPARQL endpoint at `ldf.fi/loa/sparql` is **live over POST only** — a GET times out and its own redirect target 404s — and the historically published Aaltodoc OAI path `/oai/request` now 301s to `/server/oai/request` under DSpace 9.2. `aalto.finna.fi` returns 403 to a bot, which is a finding about that edge and not about Aalto.
+
+Three of Aalto's contracts still carry Swagger sample-project boilerplate (`termsOfService: http://swagger.io/terms/`, `contact: apiteam@swagger.io`) that was never replaced. That is a hygiene finding, not an ownership signal — the servers on all three are Aalto's own hosts.
+
+No endpoints were fabricated, and no vendor contract is attributed to Aalto.
 
 ## Maintainers
 

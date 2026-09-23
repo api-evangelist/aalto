@@ -1,0 +1,92 @@
+openapi: 3.2.0
+info:
+  description: 'Aalto API to query project and cost centers.
+
+
+    parameter=value is interpreted as ''WHERE parameter = ''value''
+
+    parameter=* value* is interpreted as ''WHERE parameter LIKE ''%value%''
+
+    .'
+  version: 1.0.10
+  title: Aalto project and costcenter Organisational Data API
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://api.aalto.fi:443
+  description: Prod
+- url: https://aalto-cost-centers-test.api.aalto.fi:443
+  description: Test
+tags:
+- name: Organisational Data
+paths:
+  /api/dw_projects/departments:
+    get:
+      tags:
+      - Organisational Data
+      parameters:
+      - in: query
+        name: active
+        description: true - if just active projects are needed
+        schema:
+          type: string
+          default: ''
+      - in: query
+        name: Code
+        description: Code like U909
+        schema:
+          type: string
+          default: ''
+      - in: query
+        name: Name
+        description: 'Department name '
+        schema:
+          type: string
+          default: ''
+      - in: query
+        name: formatCSV
+        description: 'true to return in CSV format '
+        schema:
+          type: string
+          default: ''
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request
+        '500':
+          description: Error
+      security:
+      - ApiKeyAuth: []
+      summary: Get api dw projects departments
+      x-summary-source: derived
+      operationId: getApiDwProjectsDepartments
+      x-operation-id-source: derived
+  /api/dw_projects/schools:
+    get:
+      tags:
+      - Organisational Data
+      parameters: []
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request
+        '500':
+          description: Error
+      security:
+      - ApiKeyAuth: []
+      summary: Get api dw projects schools
+      x-summary-source: derived
+      operationId: getApiDwProjectsSchools
+      x-operation-id-source: derived
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: X-ApiKey
+      in: header

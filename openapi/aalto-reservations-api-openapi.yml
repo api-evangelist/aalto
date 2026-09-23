@@ -1,0 +1,176 @@
+openapi: 3.2.0
+info:
+  title: Aalto facilities Reservations API
+  description: Aalto API to query Aalto facility data
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: it-integ@aalto.fi
+  version: 1.0.2
+servers:
+- url: https://facilities.api.aalto.fi/api/aalto
+  description: PROD
+- url: https://facilities-test.api.aalto.fi/api/aalto
+  description: TEST
+tags:
+- name: Reservations
+  description: Room reservations.
+paths:
+  /reservations/v1/reservations/{id}:
+    get:
+      tags:
+      - Reservations
+      summary: Find a reservation by id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: user_key
+        in: query
+        description: Aalto API gateway user key
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content: {}
+        '404':
+          description: Could not find a reservation matching the given id
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+            example:
+              example:
+                error: Could not find a reservation matching the given id
+      operationId: getReservationsV1ReservationsById
+      x-operation-id-source: derived
+  /reservations/v1/reservations:
+    get:
+      tags:
+      - Reservations
+      summary: Return all of the reservations
+      operationId: getReservations
+      parameters:
+      - name: spaceCodes
+        in: query
+        description: Comma-separated list of space identifiers
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        description: search from YYYY-MM-DD
+        required: true
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        description: search to YYYY-MM-DD
+        required: true
+        schema:
+          type: string
+      - name: phoneNumber
+        in: query
+        schema:
+          type: string
+      - name: email
+        in: query
+        schema:
+          type: string
+      - name: user_key
+        in: query
+        description: Aalto API gateway user key
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reservation'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+            example:
+              example:
+                error: Invalid start date
+components:
+  schemas:
+    errorType:
+      type: object
+      properties:
+        code:
+          type: number
+        message:
+          type: string
+    errorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/errorType'
+    Reservation:
+      required:
+      - name
+      - phoneNumber
+      - spaceCode
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 123456780
+        name:
+          type: string
+          description: Event name
+          example: TEST Event
+        buildingCode:
+          type: string
+          example: R001
+        spaceCode:
+          type: string
+          description: Code of the reserved space. Normally room number
+          example: U598
+        date:
+          type: string
+          description: Reservation date (e.g. 2020-12-25)
+          format: date
+          example: '2020-12-25T00:00:00.000Z'
+        startTime:
+          type: string
+          description: Reservation start time (e.g. 14:00)
+          example: 840
+        endTime:
+          type: string
+          description: Reservation end time (e.g. 14:30)
+          example: 870
+        duration:
+          type: integer
+          description: Duration in minutes
+          format: int64
+          example: 30
+        persons:
+          type: integer
+          description: Number of persons
+          format: int64
+          example: 1
+        type:
+          type: string
+          description: Usage type. Possible values are Internal (S), Planning (L), Student (A), External (H)
+          example: Student
+        phoneNumber:
+          type: string
+          example: 123456789
+        email:
+          type: string
+          example: example@email.com
+      description: Represents a reservation.
