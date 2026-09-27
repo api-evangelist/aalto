@@ -19,7 +19,9 @@
     "aalto-organisational-data-api-openapi.yml",
     "aalto-projects-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -37,11 +39,12 @@
     "aalto-projects-costcenters-api-openapi.json: declared missing tag: Costcenters",
     "aalto-projects-costcenters-api-openapi.json: declared missing tag: Organisational Data",
     "aalto-projects-costcenters-api-openapi.json: declared missing tag: Projects",
-    "apis.yml register: already-registered"
+    "superseded outputs removed: aalto-cost-centers-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 18 total)"
   ],
   "skipped": [
     "aalto-buildings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "aalto-costcenters-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aalto-cost-centers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "aalto-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "aalto-organisational-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "aalto-profiles-api-openapi.yml: previously refined output, superseded by openapi/_original/",
