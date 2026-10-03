@@ -239,150 +239,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    courseunitrealisationsType:
-      type: array
-      items:
-        $ref: '#/components/schemas/courseunitrealisationType'
-    errorResponse:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/errorType'
-    courseunitrealisation-enhancedType:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          $ref: '#/components/schemas/langType'
-        activityStartDate:
-          type: string
-          example: '2020-08-04T00:00:00.000Z'
-        activityEndDate:
-          type: string
-          example: '2020-08-04T00:00:00.000Z'
-        enrollmentCount:
-          type: string
-        courseCode:
-          type: string
-        teachingLanguage:
-          type: array
-          items:
-            type: string
-        costCentre:
-          type: array
-          items:
-            $ref: '#/components/schemas/costCentre'
-        responsibleTeachers:
-          type: array
-          items:
-            $ref: '#/components/schemas/stringType'
-        responsibleTeachersDetails:
-          type: array
-          items:
-            type: object
-            properties:
-              employeeNumber:
-                type: string
-                example: ATTESTI42
-              eppn:
-                type: string
-                example: testin5@aalto.fi
-        participants:
-          type: array
-          items:
-            type: string
-    error:
-      required:
-      - message
-      type: object
-      properties:
-        message:
-          type: string
-        inner:
-          type: string
-    courseunitsType:
-      type: array
-      items:
-        $ref: '#/components/schemas/courseunitType'
-    errorType:
-      type: object
-      properties:
-        code:
-          type: number
-        message:
-          type: string
-    costCentre:
-      type: object
-      properties:
-        name:
-          $ref: '#/components/schemas/langType'
-        share:
-          type: integer
-        code:
-          type: string
-        schoolName:
-          $ref: '#/components/schemas/langType'
-        schoolCode:
-          type: string
-        abbreviation:
-          $ref: '#/components/schemas/langType'
-    langType:
-      type: object
-      properties:
-        fi:
-          type: string
-        sv:
-          type: string
-        en:
-          type: string
-    stringType:
-      type: string
-    courseunitType:
-      type: object
-      properties:
-        code:
-          type: string
-        groupId:
-          type: string
-        id:
-          type: string
-        curriculumPeriodIds:
-          type: array
-          items:
-            type: string
-        name:
-          $ref: '#/components/schemas/langType'
-        organisations:
-          type: array
-          items:
-            type: object
-            properties:
-              organisationId:
-                $ref: '#/components/schemas/stringType'
-              educationalInstitutionUrn:
-                $ref: '#/components/schemas/stringType'
-              roleUrn:
-                $ref: '#/components/schemas/stringType'
-              share:
-                type: integer
-                example: 1
-              validityPeriod:
-                type: object
-                properties: {}
-        validityPeriod.startDate:
-          type: string
-          example: '2020-08-04T00:00:00.000Z'
-        validityPeriod.endDate:
-          type: string
-          example: '2020-08-04T00:00:00.000Z'
-        credits:
-          type: object
-          properties:
-            min:
-              type: integer
-            max:
-              type: integer
     courseunitrealisationType:
       type: object
       properties:
@@ -451,10 +307,154 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/stringType'
+    errorType:
+      type: object
+      properties:
+        code:
+          type: number
+        message:
+          type: string
+    courseunitsType:
+      type: array
+      items:
+        $ref: '#/components/schemas/courseunitType'
+    courseunitrealisationsType:
+      type: array
+      items:
+        $ref: '#/components/schemas/courseunitrealisationType'
+    courseunitType:
+      type: object
+      properties:
+        code:
+          type: string
+        groupId:
+          type: string
+        id:
+          type: string
+        curriculumPeriodIds:
+          type: array
+          items:
+            type: string
+        name:
+          $ref: '#/components/schemas/langType'
+        organisations:
+          type: array
+          items:
+            type: object
+            properties:
+              organisationId:
+                $ref: '#/components/schemas/stringType'
+              educationalInstitutionUrn:
+                $ref: '#/components/schemas/stringType'
+              roleUrn:
+                $ref: '#/components/schemas/stringType'
+              share:
+                type: integer
+                example: 1
+              validityPeriod:
+                type: object
+                properties: {}
+        validityPeriod.startDate:
+          type: string
+          example: '2020-08-04T00:00:00.000Z'
+        validityPeriod.endDate:
+          type: string
+          example: '2020-08-04T00:00:00.000Z'
+        credits:
+          type: object
+          properties:
+            min:
+              type: integer
+            max:
+              type: integer
+    langType:
+      type: object
+      properties:
+        fi:
+          type: string
+        sv:
+          type: string
+        en:
+          type: string
+    costCentre:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/langType'
+        share:
+          type: integer
+        code:
+          type: string
+        schoolName:
+          $ref: '#/components/schemas/langType'
+        schoolCode:
+          type: string
+        abbreviation:
+          $ref: '#/components/schemas/langType'
+    error:
+      required:
+      - message
+      type: object
+      properties:
+        message:
+          type: string
+        inner:
+          type: string
+    errorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/errorType'
     courseunitrealisations-enhancedType:
       type: array
       items:
         $ref: '#/components/schemas/courseunitrealisation-enhancedType'
+    courseunitrealisation-enhancedType:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          $ref: '#/components/schemas/langType'
+        activityStartDate:
+          type: string
+          example: '2020-08-04T00:00:00.000Z'
+        activityEndDate:
+          type: string
+          example: '2020-08-04T00:00:00.000Z'
+        enrollmentCount:
+          type: string
+        courseCode:
+          type: string
+        teachingLanguage:
+          type: array
+          items:
+            type: string
+        costCentre:
+          type: array
+          items:
+            $ref: '#/components/schemas/costCentre'
+        responsibleTeachers:
+          type: array
+          items:
+            $ref: '#/components/schemas/stringType'
+        responsibleTeachersDetails:
+          type: array
+          items:
+            type: object
+            properties:
+              employeeNumber:
+                type: string
+                example: ATTESTI42
+              eppn:
+                type: string
+                example: testin5@aalto.fi
+        participants:
+          type: array
+          items:
+            type: string
+    stringType:
+      type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

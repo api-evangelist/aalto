@@ -106,6 +106,18 @@ paths:
                 error: Invalid start date
 components:
   schemas:
+    errorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/errorType'
+    errorType:
+      type: object
+      properties:
+        code:
+          type: number
+        message:
+          type: string
     Reservation:
       required:
       - name
@@ -162,15 +174,3 @@ components:
           type: string
           example: example@email.com
       description: Represents a reservation.
-    errorType:
-      type: object
-      properties:
-        code:
-          type: number
-        message:
-          type: string
-    errorResponse:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/errorType'
