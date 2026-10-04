@@ -549,6 +549,9 @@ apis:
   - type: Documentation
     url: https://3scale.apps.ocp4.aalto.fi/docs/swagger/projectscostcenters
 common:
+  - type: CapabilityMap
+    url: capabilities/aalto-capability-edges.yml
+    name: Aalto University Business Capability Map
   - type: Website
     url: https://www.aalto.fi/en
   - type: Documentation
