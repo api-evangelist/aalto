@@ -239,6 +239,10 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    courseunitsType:
+      type: array
+      items:
+        $ref: '#/components/schemas/courseunitType'
     courseunitrealisationType:
       type: object
       properties:
@@ -307,6 +311,37 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/stringType'
+    errorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/errorType'
+    courseunitrealisationsType:
+      type: array
+      items:
+        $ref: '#/components/schemas/courseunitrealisationType'
+    error:
+      required:
+      - message
+      type: object
+      properties:
+        message:
+          type: string
+        inner:
+          type: string
+    courseunitrealisations-enhancedType:
+      type: array
+      items:
+        $ref: '#/components/schemas/courseunitrealisation-enhancedType'
+    langType:
+      type: object
+      properties:
+        fi:
+          type: string
+        sv:
+          type: string
+        en:
+          type: string
     errorType:
       type: object
       properties:
@@ -314,14 +349,6 @@ components:
           type: number
         message:
           type: string
-    courseunitsType:
-      type: array
-      items:
-        $ref: '#/components/schemas/courseunitType'
-    courseunitrealisationsType:
-      type: array
-      items:
-        $ref: '#/components/schemas/courseunitrealisationType'
     courseunitType:
       type: object
       properties:
@@ -367,15 +394,6 @@ components:
               type: integer
             max:
               type: integer
-    langType:
-      type: object
-      properties:
-        fi:
-          type: string
-        sv:
-          type: string
-        en:
-          type: string
     costCentre:
       type: object
       properties:
@@ -391,24 +409,8 @@ components:
           type: string
         abbreviation:
           $ref: '#/components/schemas/langType'
-    error:
-      required:
-      - message
-      type: object
-      properties:
-        message:
-          type: string
-        inner:
-          type: string
-    errorResponse:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/errorType'
-    courseunitrealisations-enhancedType:
-      type: array
-      items:
-        $ref: '#/components/schemas/courseunitrealisation-enhancedType'
+    stringType:
+      type: string
     courseunitrealisation-enhancedType:
       type: object
       properties:
@@ -453,8 +455,6 @@ components:
           type: array
           items:
             type: string
-    stringType:
-      type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
