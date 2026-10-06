@@ -68,7 +68,7 @@ tags:
   - Library
   - API Gateway
 created: '2026-06-03'
-modified: '2026-08-30'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 
 x-coverage:
@@ -549,6 +549,10 @@ apis:
   - type: Documentation
     url: https://3scale.apps.ocp4.aalto.fi/docs/swagger/projectscostcenters
 common:
+  - url: https://www.aalto.fi/en/news
+    type: Blog
+  - url: https://www.aalto.fi/en/news/feed?redirectFrom=news%2Ffeed%2F
+    type: BlogRSS
   - type: CapabilityMap
     url: capabilities/aalto-capability-edges.yml
     name: Aalto University Business Capability Map
