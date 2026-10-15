@@ -15,3 +15,59 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: aalto-edugain
+  label: eduGAIN
+  partner_name: eduGAIN
+  category: research and education identity federation
+  type: register
+  channel: standard-directory
+  evidence: https://technical.edugain.org/api.php?action=list_entities&type=idp&format=json
+  source: edge
+  relationship: network-participant
+  contract_reference:
+    network: eduGAIN (GÉANT interfederation)
+    spec_file: null
+    roles:
+    - identity-provider
+    - service-provider
+    role: identity-and-service-provider
+    federations:
+    - HAKA
+    matched_by: domain:aalto.fi
+    entities:
+    - entity_id: https://idp.aalto.fi/idp/shibboleth
+      role: identity-provider
+      federation: HAKA
+      display_name: Aalto University
+      entity_categories:
+      - '4'
+      - '11'
+      - '76'
+      - '129'
+      - '190'
+      - '192'
+      - '193'
+      - '194'
+      - '198'
+      sirtfi: true
+      coco: false
+    - entity_id: https://eg.login.math.aalto.fi/shibboleth
+      role: service-provider
+      federation: HAKA
+      display_name: Aalto University
+      entity_categories:
+      - '1'
+      sirtfi: false
+      coco: true
+    - entity_id: https://openlearning.aalto.fi/shibboleth
+      role: service-provider
+      federation: HAKA
+      display_name: Aalto University
+      entity_categories:
+      - '1'
+      sirtfi: false
+      coco: true
+    detected_by: sweep-higher-ed.py
+    detected: '2026-10-15'
+  status: not-a-workflow
+  arazzo: null

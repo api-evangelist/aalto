@@ -2,6 +2,8 @@ generated: '2026-10-14'
 method: searched
 checked:
 - https://plugins.jetbrains.com/
+- https://technical.edugain.org/api.php?action=list_entities&type=idp&format=json
+- https://technical.edugain.org/api.php?action=list_entities&type=sp&format=json
 marketplace_apps: []
 edges:
 - partner_name: JetBrains Marketplace
@@ -21,5 +23,60 @@ edges:
   - Verified vendor
   detected_by: sweep-devtools.py
   detected: '2026-10-14'
+- partner_name: eduGAIN
+  partner: null
+  type: register
+  channel: standard-directory
+  relationship: network-participant
+  direction: partner-built
+  evidence: https://technical.edugain.org/api.php?action=list_entities&type=idp&format=json
+  category: research and education identity federation
+  contract_reference:
+    network: eduGAIN (GÉANT interfederation)
+    spec_file: null
+    roles:
+    - identity-provider
+    - service-provider
+    role: identity-and-service-provider
+    federations:
+    - HAKA
+    matched_by: domain:aalto.fi
+    entities:
+    - entity_id: https://idp.aalto.fi/idp/shibboleth
+      role: identity-provider
+      federation: HAKA
+      display_name: Aalto University
+      entity_categories:
+      - '4'
+      - '11'
+      - '76'
+      - '129'
+      - '190'
+      - '192'
+      - '193'
+      - '194'
+      - '198'
+      sirtfi: true
+      coco: false
+    - entity_id: https://eg.login.math.aalto.fi/shibboleth
+      role: service-provider
+      federation: HAKA
+      display_name: Aalto University
+      entity_categories:
+      - '1'
+      sirtfi: false
+      coco: true
+    - entity_id: https://openlearning.aalto.fi/shibboleth
+      role: service-provider
+      federation: HAKA
+      display_name: Aalto University
+      entity_categories:
+      - '1'
+      sirtfi: false
+      coco: true
+    detected_by: sweep-higher-ed.py
+    detected: '2026-10-15'
+  detected_by: sweep-higher-ed.py
+  first_seen: '2026-10-15'
 source:
 - https://plugins.jetbrains.com/
