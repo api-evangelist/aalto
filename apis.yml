@@ -504,16 +504,18 @@ apis:
     url: https://3scale.apps.ocp4.aalto.fi/docs/swagger/research
   - type: Documentation
     url: https://3scale.apps.ocp4.aalto.fi/docs/swagger/projectscostcenters
-- aid: aalto:aalto-sisu-courses-api
-  name: Aalto University SISU Courses API
-  description: The SISU Courses API from Aalto University — 4 operation(s) for sisu courses.
+- aid: aalto:aalto-courseunitrealisations-deprecated-api
+  name: Aalto University CourseUnitRealisations (Deprecated) API
+  description: >-
+    The CourseUnitRealisations (Deprecated) API from Aalto University — 2 operation(s) for courseunitrealisations
+    (deprecated).
   humanURL: https://www.aalto.fi/en/services/api-gateway-application-programming-interface
   baseURL: https://3scale.apps.ocp4.aalto.fi
   tags:
-  - SISU Courses
+  - CourseUnitRealisations (Deprecated)
   properties:
   - type: OpenAPI
-    url: openapi/aalto-sisu-courses-api-openapi.yml
+    url: openapi/aalto-courseunitrealisations-deprecated-api-openapi.yml
   - type: JSONSchema
     url: json-schema/aalto-facilities-api-schema.json
   - type: Documentation

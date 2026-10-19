@@ -169,15 +169,43 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    addressType:
+    dailyOpeningHoursType:
       type: object
       properties:
-        addressLine:
+        aklo:
           type: string
-        postalCode:
+        lklo:
           type: string
-        municipality:
+    RoomType:
+      type: object
+      properties:
+        ID:
           type: string
+        categories:
+          type: array
+          items:
+            type: string
+        coordinates:
+          type: array
+          items:
+            type: number
+        currentBookingStatus:
+          type: string
+    buildingDetailsType:
+      type: object
+      properties:
+        buildingCode:
+          type: string
+        nickName:
+          $ref: '#/components/schemas/nickNameType'
+        address:
+          $ref: '#/components/schemas/addressType'
+        openingHours:
+          $ref: '#/components/schemas/openingHoursType'
+        Rooms:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoomType'
     openingHoursType:
       type: object
       properties:
@@ -195,61 +223,19 @@ components:
           $ref: '#/components/schemas/dailyOpeningHoursType'
         su:
           $ref: '#/components/schemas/dailyOpeningHoursType'
-    dailyOpeningHoursType:
+    addressType:
       type: object
       properties:
-        aklo:
+        addressLine:
           type: string
-        lklo:
+        postalCode:
           type: string
-    errorResponse:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/errorType'
-    nickNameType:
-      type: object
-      properties:
-        fi:
-          type: string
-        sv:
-          type: string
-        en:
-          type: string
-    RoomType:
-      type: object
-      properties:
-        ID:
-          type: string
-        categories:
-          type: array
-          items:
-            type: string
-        coordinates:
-          type: array
-          items:
-            type: number
-        currentBookingStatus:
+        municipality:
           type: string
     buildingsType:
       type: array
       items:
         $ref: '#/components/schemas/buildingType'
-    buildingDetailsType:
-      type: object
-      properties:
-        buildingCode:
-          type: string
-        nickName:
-          $ref: '#/components/schemas/nickNameType'
-        address:
-          $ref: '#/components/schemas/addressType'
-        openingHours:
-          $ref: '#/components/schemas/openingHoursType'
-        Rooms:
-          type: array
-          items:
-            $ref: '#/components/schemas/RoomType'
     buildingType:
       type: object
       properties:
@@ -259,6 +245,20 @@ components:
           $ref: '#/components/schemas/nickNameType'
         address:
           $ref: '#/components/schemas/addressType'
+    nickNameType:
+      type: object
+      properties:
+        fi:
+          type: string
+        sv:
+          type: string
+        en:
+          type: string
+    errorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/errorType'
     errorType:
       type: object
       properties:

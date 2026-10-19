@@ -1,0 +1,213 @@
+openapi: 3.2.0
+info:
+  description: Aalto University Course API. Please do not use, as it returns old data. Instead please use https://3scale.apps.ocp4.aalto.fi/docs/swagger/open_courses_sisu.
+  version: 1.0.0
+  title: Aalto Open API (Deprecated) CourseUnitRealisations…
+servers:
+- url: http://api.aalto.fi:443/api
+tags:
+- name: CourseUnitRealisations (Deprecated)
+paths:
+  /courseunitrealisations/:
+    get:
+      tags:
+      - CourseUnitRealisations (Deprecated)
+      summary: Return Aalto University active course realisations.
+      description: ''
+      operationId: getCourseUnitRealisations
+      parameters:
+      - name: user_key
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: code
+        in: query
+        required: false
+        description: 'wild card search for code Example: Besc*'
+        schema:
+          type: string
+          default: ''
+      - name: endTimeAfter
+        in: query
+        required: false
+        description: 'return all course units which ends after the specified time. Default is current date. Example: 2013-12-31'
+        schema:
+          type: string
+          default: ''
+      - name: endTimeBefore
+        in: query
+        required: false
+        description: 'return all course units which ends before the specified time Example: 2014-12-31'
+        schema:
+          type: string
+          default: ''
+      - name: organizationId
+        in: query
+        required: false
+        description: 'filter by organization id Example: A802'
+        schema:
+          type: string
+          default: ''
+      - name: search
+        in: query
+        required: false
+        description: 'Searches from course code, name, teacher and summary. Supports multiple keywords. Example: Kandidaatti+seminaari+A801. Deprecated, please do not use'
+        schema:
+          type: string
+          default: ''
+      - name: startTimeAfter
+        in: query
+        required: false
+        description: 'return all course units which starts after the specified time Example: 2013-12-31'
+        schema:
+          type: string
+          default: ''
+      - name: startTimeBefore
+        in: query
+        required: false
+        description: 'return all course units which starts before the specified time Example: 2014-12-31'
+        schema:
+          type: string
+          default: ''
+      - name: unitType
+        in: query
+        required: false
+        description: 'filter course units by type Example: course'
+        schema:
+          type: string
+          default: ''
+      - name: limit
+        in: query
+        required: false
+        description: 'Limit the size of resultset Example: 200'
+        schema:
+          type: integer
+          default: '100'
+      - name: offset
+        in: query
+        required: false
+        description: 'Example: 101'
+        schema:
+          type: integer
+          default: '0'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CourseUnitRealisation'
+  /courseunitrealisations/{id}:
+    get:
+      tags:
+      - CourseUnitRealisations (Deprecated)
+      summary: Return a course unit realization by id. Deprecated, please do not use
+      description: ''
+      operationId: getCourseUnitRealisationById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user_key
+        in: query
+        required: true
+        schema:
+          type: string
+          default: ''
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseUnitRealisation'
+components:
+  schemas:
+    CourseUnitRealisation:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        code:
+          type: string
+        startDate:
+          type: string
+          format: date
+          description: Course start date (e.g. 2018-09-16).
+        endDate:
+          type: string
+          format: date
+          description: Course end date(e.g. 2018-12-16).
+        type:
+          type: string
+        name:
+          $ref: '#/components/schemas/LocalizedString'
+        summary:
+          $ref: '#/components/schemas/Summary'
+        organizationId:
+          type: string
+        credits:
+          type: integer
+          format: int64
+        courseUnitId:
+          type: string
+        languageOfInstructionCodes:
+          type: array
+          items:
+            type: string
+        teachers:
+          type: array
+          items:
+            type: string
+    Summary:
+      type: object
+      properties:
+        workload:
+          $ref: '#/components/schemas/LocalizedString'
+        prequisities:
+          $ref: '#/components/schemas/LocalizedString'
+        learningOutcomes:
+          $ref: '#/components/schemas/LocalizedString'
+        literature:
+          $ref: '#/components/schemas/LocalizedString'
+        languagegueOfInstructions:
+          $ref: '#/components/schemas/LocalizedString'
+        registration:
+          $ref: '#/components/schemas/LocalizedString'
+        homepage:
+          $ref: '#/components/schemas/LocalizedString'
+        content:
+          $ref: '#/components/schemas/LocalizedString'
+        cerfLevel:
+          $ref: '#/components/schemas/LocalizedString'
+        level:
+          $ref: '#/components/schemas/LocalizedString'
+        teacherInCharge:
+          $ref: '#/components/schemas/LocalizedString'
+        assesmentMethods:
+          $ref: '#/components/schemas/LocalizedString'
+        courseStatus:
+          $ref: '#/components/schemas/LocalizedString'
+        substitutes:
+          $ref: '#/components/schemas/LocalizedString'
+        additionalInformation:
+          $ref: '#/components/schemas/LocalizedString'
+        gradingScale:
+          $ref: '#/components/schemas/LocalizedString'
+        teachingPeriod:
+          $ref: '#/components/schemas/LocalizedString'
+    LocalizedString:
+      type: object
+      properties:
+        fi:
+          type: string
+        sv:
+          type: string
+        en:
+          type: string
