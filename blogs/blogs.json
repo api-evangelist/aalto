@@ -5,7 +5,7 @@
       "source": "https://www.aalto.fi/en/news",
       "feed_url": "https://www.aalto.fi/en/news/feed/",
       "title": "",
-      "saved": 9,
+      "saved": 0,
       "method": "discovered"
     },
     {
@@ -14,8 +14,15 @@
       "title": "",
       "saved": 0,
       "method": "feed"
+    },
+    {
+      "source": "https://www.aalto.fi/en/news/feed/",
+      "feed_url": "https://www.aalto.fi/en/news/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
     }
   ],
-  "post_count": 9,
-  "fetched": "2026-10-10T13:15:00Z"
+  "post_count": 17,
+  "fetched": "2026-10-17T14:53:57Z"
 }
