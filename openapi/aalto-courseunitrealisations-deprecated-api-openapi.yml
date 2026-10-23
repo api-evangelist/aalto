@@ -211,3 +211,9 @@ components:
           type: string
         en:
           type: string
+x-provenance:
+  method: harvested
+  publisher: Aalto University
+  source: https://3scale.apps.ocp4.aalto.fi/swagger/spec/course_api.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
