@@ -1,4 +1,4 @@
-# Aalto University (aalto)
+# Aalto University
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,96 +64,137 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Aalto University is a multidisciplinary public research university in Espoo, Finland. This repository catalogs Aalto's public developer and API footprint as an [APIs.json](http://apisjson.org) profile, profiled under the API Evangelist university pipeline — which settles **who operates each surface** before anything is saved.
+Aalto University is a multidisciplinary public research university in Espoo, Finland, formed in 2010 from the merger of the Helsinki University of Technology, the Helsinki School of Economics and the University of Art and Design Helsinki. Unusually for this cohort, Aalto operates a real institution-owned API program rather than only a set of vendor tenancies: the Aalto API Gateway (Red Hat 3scale, at 3scale.apps.ocp4.aalto.fi) publishes five documented API products — facilities and room reservations, SISU course data, Acris research publications, projects and cost centres, and a deprecated Oodi-sourced course API — and its ActiveDocs index is publicly readable, exposing forty-four Aalto-authored Swagger/OpenAPI documents whose servers all sit under *.api.aalto.fi. Every one of those endpoints is API-key gated and returns 403 to an anonymous caller, so the contracts are public while the data is not. The genuinely anonymous surfaces are elsewhere: the Aaltodoc institutional repository (Aalto-hosted DSpace 9.2) serves a live OAI-PMH 2.0 endpoint with sixteen metadata formats and an open REST API, and the Linked Open Aalto Data SPARQL endpoint answers real queries — but only over POST, since GET times out. Aalto also runs its own Shibboleth SAML 2.0 identity provider and is registered in the Haka federation with forty-one entities, which is machine-readable institutional infrastructure that almost no university in this cohort catalogues. Its library discovery, research information system and research portal are vendor tenancies (Ex Libris, Elsevier Pure) and are recorded as relationships, not as Aalto's engineering.
 
-Aalto is unusual in this cohort: it runs a real institution-owned API program rather than only a set of vendor tenancies. Its Red Hat 3scale gateway leaves the ActiveDocs index open without credentials, exposing forty-four Aalto-authored Swagger/OpenAPI documents whose servers all sit under `*.api.aalto.fi`. Every gateway endpoint is API-key gated and returns `403` to an anonymous caller — so the contracts are public and the data is not. The genuinely anonymous surfaces are the Aaltodoc repository (OAI-PMH 2.0 + DSpace 9.2 REST) and the Linked Open Aalto Data SPARQL endpoint.
+**Areas:** University · Higher Education · Education · Finland · Europe · Public Research University · Research · Research Data · Open Data · Linked Data · Course Catalog · Identity Federation
 
-- APIs.json: https://raw.githubusercontent.com/api-evangelist/aalto/refs/heads/main/apis.yml
-- Run it with Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=aalto-api-evangelist&utm_content=repo
+## Aalto University on APIs.io
 
-## Type
+Everything profiled for Aalto University is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/aalto/](https://apis.io/providers/aalto/)** — or go straight to one of the APIs or properties below.
 
-- University / Public Research University / Index / Provider / 1st-Party
+### APIs (18)
 
-## Tags
+- [Aalto API Gateway](https://apis.io/apis/aalto/api-gateway/) — Aalto's own Red Hat 3scale API gateway, the front door to every institution-operated API at Aalto. Five API products are documented on the portal; the…
+- [Aalto Open API — Course API (Oodi, deprecated)](https://apis.io/apis/aalto/course-oodi-deprecated/) — The Oodi-sourced course API, still published on the portal and explicitly marked deprecated: "This API source is OODI and should not be used." Swagger 2.0,…
+- [Aaltodoc Repository — OAI-PMH and DSpace REST](https://apis.io/apis/aalto/aaltodoc/) — Aalto's institutional repository of theses, articles and conference publications, running Aalto-hosted DSpace 9.2 on aaltodoc.aalto.fi. Both read surfaces…
+- [Aalto Shibboleth Identity Provider (Haka / eduGAIN)](https://apis.io/apis/aalto/identity-federation/) — Aalto's own Shibboleth SAML 2.0 identity provider, entityID https://idp.aalto.fi/idp/shibboleth, scope aalto.fi, registration authority http://www.aalto.fi…
+- [Linked Open Aalto Data (SPARQL)](https://apis.io/apis/aalto/linked-open-data/) — Aalto's open data published as Linked Data — courses, people, publications, places, projects, organisation and events — under data.aalto.fi URIs. The…
+- [Acris — Aalto Current Research Information System (Elsevier Pure)](https://apis.io/apis/aalto/acris-pure/) — Aalto's research information system is Elsevier Pure, deployed as Acris at acris.aalto.fi with the Pure Portal at research.aalto.fi. The data and the DOIs…
+- [Aalto Learning Centre discovery (Ex Libris Primo / Alma, Finna)](https://apis.io/apis/aalto/library-discovery/) — Library discovery and the library management system are Ex Libris products under Aalto tenancies — primo.aalto.fi resolves to the Primo NDE interface with…
+- [SISU student information system (Funidata)](https://apis.io/apis/aalto/sisu-sis/) — sisu.aalto.fi is Aalto's deployment of SISU, the student information system built by Funidata, a company jointly owned by Finnish universities. It is the…
+- [Aalto University Buildings API](https://apis.io/apis/aalto/aalto-buildings-api/) — Aalto Building related data
+- [Aalto University Groups API](https://apis.io/apis/aalto/aalto-groups-api/) — The Groups API from Aalto University — 1 operation(s) for groups.
+- [Aalto University Organisational Data API](https://apis.io/apis/aalto/aalto-organisational-data-api/) — The Organisational Data API from Aalto University — 2 operation(s) for organisational data.
+- [Aalto University Profiles API](https://apis.io/apis/aalto/aalto-profiles-api/) — The Profiles API from Aalto University — 1 operation(s) for profiles.
+- [Aalto University Projects API](https://apis.io/apis/aalto/aalto-projects-api/) — The Projects API from Aalto University — 1 operation(s) for projects.
+- [Aalto University Research Outputs API](https://apis.io/apis/aalto/aalto-research-outputs-api/) — The research-outputs API from Aalto University — 3 operation(s) for research-outputs.
+- [Aalto University Research Outputs Enhanced API](https://apis.io/apis/aalto/aalto-research-outputs-enhanced-api/) — The research-outputs-enhanced API from Aalto University — 1 operation(s) for research-outputs-enhanced.
+- [Aalto University Reservations API](https://apis.io/apis/aalto/aalto-reservations-api/) — Room reservations.
+- [Aalto University SISU Courses API](https://apis.io/apis/aalto/aalto-sisu-courses-api/) — The SISU Courses API from Aalto University — 4 operation(s) for sisu courses.
+- [Aalto University Cost Centers API](https://apis.io/apis/aalto/aalto-cost-centers-api/) — The Cost Centers API from Aalto University — 1 operation(s) for cost centers.
 
-University, Higher Education, Education, Finland, Europe, Public Research University, Research, Research Data, Open Data, Linked Data, Course Catalog, Identity Federation, Research Computing, Library, API Gateway
+### Published properties
 
-## Institution-operated surfaces
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-These are Aalto's own. The contracts below are saved in `openapi/`, with pristine copies in `openapi/_original/`.
+#### JSON Schema (2)
 
-- **Aalto API Gateway** — Red Hat 3scale at `3scale.apps.ocp4.aalto.fi` (front door `apiportal.aalto.fi`); five documented API products, forty-four specs in the public ActiveDocs index. Key issuance requires an Aalto account.
-- **Aalto Facilities API** — buildings, opening hours, rooms and reservations. OpenAPI 3.0.1 · `facilities.api.aalto.fi`
-- **Aalto Course API (SISU)** — course units and realisations. OpenAPI 3.0.1 · `course.api.aalto.fi`
-- **Aalto Research Publications API (Acris gateway)** — Aalto's own four-path wrapper over its Pure data. OpenAPI 3.0.0 · `research.api.aalto.fi`
-- **Aalto Projects and Cost Centers API** — cost centres, projects, departments, schools. OpenAPI 3.0.0 · `api.aalto.fi`
-- **Aalto People Profile API** — groups and public staff profiles. OpenAPI 3.0.1 · `aaltopeople.api.aalto.fi`
-- **Aalto Open API (Course, Oodi)** — *deprecated*; Aalto says "should not be used", superseded by the SISU API. No spec saved.
-- **Aaltodoc Repository** — Aalto-hosted DSpace 9.2; OAI-PMH 2.0 and REST, both anonymous and verified live.
-- **Shibboleth Identity Provider** — `https://idp.aalto.fi/idp/shibboleth`, scope `aalto.fi`; 41 Aalto entities registered in the Haka federation, onward to eduGAIN.
+The data models the API reads and writes.
 
-## Tenant surfaces (Aalto's data, a vendor's contract)
+- [Sisu API (replaces /oodiapi) — component schemas](https://apis.io/schemas/aalto/aalto-course-sisu-api/)
+- [Aalto facilities api — component schemas](https://apis.io/schemas/aalto/aalto-facilities-api/)
 
-Recorded as relationships. **No vendor specification is saved under Aalto's name.**
+#### JSON-LD (1)
 
-- **Acris / research.aalto.fi** — Elsevier Pure research information system and portal.
-- **primo.aalto.fi, aalto.alma.exlibrisgroup.com, aalto.finna.fi** — Ex Libris Primo/Alma and the national Finna discovery platform.
-- **sisu.aalto.fi** — SISU student information system, built by Funidata.
-- **ldf.fi/loa** — Linked Open Aalto Data SPARQL, served on the shared Linked Data Finland platform.
+Linked-data contexts for the provider's vocabulary.
 
-## Domain standard conformance (education regime)
+- [Aalto Context](https://apis.io/jsonld/aalto/aalto-context/)
 
-Verified by live probe — see [conformance/aalto-conformance.yml](conformance/aalto-conformance.yml).
+#### Security (2)
 
-- `oai-pmh` 2.0 · `saml` 2.0 · `shibboleth` — conformant, evidenced
-- `orcid`, `datacite`, `crossref` — deployed via Aaltodoc's public DSpace integrations
-- `scim`, `lti`, `oneroster`, `ed-fi`, `caliper`, `qti` — not found
+Authentication, trust centre, and vulnerability disclosure.
 
-## Artifacts
+- [Aalto Authentication](https://apis.io/security/aalto/aalto-authentication/)
+- [Aalto Domain Security](https://apis.io/security/aalto/aalto-domain-security/)
 
-- [openapi/](openapi/) + [openapi/_original/](openapi/_original/)
-- [json-schema/](json-schema/)
-- [authentication/aalto-authentication.yml](authentication/aalto-authentication.yml)
-- [conformance/aalto-conformance.yml](conformance/aalto-conformance.yml)
-- [errors/aalto-errors.yml](errors/aalto-errors.yml)
-- [lifecycle/aalto-lifecycle.yml](lifecycle/aalto-lifecycle.yml)
-- [plans/aalto-plans-pricing.yml](plans/aalto-plans-pricing.yml)
-- [rate-limits/aalto-rate-limits.yml](rate-limits/aalto-rate-limits.yml)
-- [finops/aalto-finops.yml](finops/aalto-finops.yml)
-- [security/aalto-domain-security.yml](security/aalto-domain-security.yml)
-- [provenance.yml](provenance.yml) — who wrote each file here
-- [review.yml](review.yml) — the probe evidence table
+#### Plans and pricing (1)
 
-## Timestamps
+Published plans, tiers and prices.
 
-- Created: 2026-06-03
-- Modified: 2026-08-30
+- [Aalto Plans Pricing](https://apis.io/plans/aalto/aalto-plans-pricing/)
 
-## Common Properties
+#### Rate limits (1)
 
-- Website: https://www.aalto.fi/en
-- Developer Portal: https://3scale.apps.ocp4.aalto.fi/
-- API Reference: https://3scale.apps.ocp4.aalto.fi/docs
-- Open Data: https://data.aalto.fi/
-- Research Repository: https://aaltodoc.aalto.fi/
-- Identity Federation: https://idp.aalto.fi/idp/shibboleth
-- Research Computing: https://scicomp.aalto.fi/
-- AI Policy: https://www.aalto.fi/en/services/ai-in-aalto
-- AI Tooling: https://ai.aalto.fi/
-- Source Code: https://version.aalto.fi/ (Aalto-operated GitLab)
-- GitHub: https://github.com/AaltoSciComp
-- Privacy: https://www.aalto.fi/en/aalto-handbook/privacy-notice-for-aaltofi
-- LinkedIn: https://www.linkedin.com/school/aalto-university/
+Published request limits.
 
-## Notes
+- [Aalto Rate Limits](https://apis.io/rate-limits/aalto/aalto-rate-limits/)
 
-All URLs were re-probed on 2026-08-30 and the evidence table is in [review.yml](review.yml). Two things a status code alone would have got wrong, both recorded: the Linked Open Aalto Data SPARQL endpoint at `ldf.fi/loa/sparql` is **live over POST only** — a GET times out and its own redirect target 404s — and the historically published Aaltodoc OAI path `/oai/request` now 301s to `/server/oai/request` under DSpace 9.2. `aalto.finna.fi` returns 403 to a bot, which is a finding about that edge and not about Aalto.
+#### FinOps (1)
 
-Three of Aalto's contracts still carry Swagger sample-project boilerplate (`termsOfService: http://swagger.io/terms/`, `contact: apiteam@swagger.io`) that was never replaced. That is a hygiene finding, not an ownership signal — the servers on all three are Aalto's own hosts.
+What the API costs to run, by operation.
 
-No endpoints were fabricated, and no vendor contract is attributed to Aalto.
+- [Aalto Finops](https://apis.io/finops/aalto/aalto-finops/)
 
-## Maintainers
+## Where to find this API
 
-- Kin Lane — kin@apievangelist.com
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.aalto.fi/en)
+- [Documentation](https://www.aalto.fi/en/services/api-gateway-application-programming-interface)
+- [API reference](https://3scale.apps.ocp4.aalto.fi/docs)
+- [Blog](https://www.aalto.fi/en/news)
+- [Privacy policy](https://www.aalto.fi/en/aalto-handbook/privacy-notice-for-aaltofi)
+- [GitHub](https://github.com/AaltoSciComp)
+
+## API Evangelist rating
+
+**Kin Score 34.3** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 53.6 |
+| Contract quality | 54.9 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 40.5 |
+| Access clarity | 28.9 |
+
+**Agent readiness 28.2** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 20.6** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/aalto/](https://apis.io/providers/aalto/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Aalto University: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/aalto/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
